@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">夜色视频</string>
+    <string name="app_about_title">立即进入，百万种子随意播</string>
+    <string name="app_about_content">服务协议:\n夜色视频为您提供的服务，看片无广告且流量高速，无需等待早享最新大片。夜色视频海量高清视频大片，每日多部首播午夜诱惑视频，让您拥有绝对的精神满足。海量独家高清极品视频内容每日呈现，伴您共度无聊寂寞时光，畅想视频盛宴，不限时，不限量。点击进入浏览本应用内容，表示您同意接受本协议的所有条件和条款以及开通会员(资费拾伍,运营商代为收取),本应用将不承担任何法律追究。</string>
+    <string name="title_file">本地视频</string>
+    <string name="title_online">在线视频</string>
+    <string name="init_decoders">初始化播放器...</string>
+    <string name="loadinfo">载入中，请稍后...</string>
+    <string name="file_oper">文件操作</string>
+    <string name="file_rename">重命名</string>
+    <string name="file_rename_failed">重命名失败</string>
+    <string name="file_rename_exists">文件已存在</string>
+    <string name="file_delete">删除</string>
+    <string name="file_delete_confirm">确定删除 (%s) ？</string>
+    <string name="video_layout_loading">正在缓冲...</string>
+    <string name="vitamio_theme_app_name">VPlayer codec</string>
+    <string name="VideoView_error_title">Cannot play video</string>
+    <string name="VideoView_error_text_invalid_progressive_playback">Sorry, this video is not valid for streaming to
+		this device.</string>
+    <string name="VideoView_error_text_unknown">对不起,这个视频不能播放。</string>
+    <string name="VideoView_error_button">OK</string>
+    <string name="mediacontroller_play_pause">Play/Pause</string>
+    <string name="imageview_content_description"></string>
+    <string name="content_desc_lock">锁定</string>
+    <string name="video_original">100%</string>
+    <string name="video_fit_screen">全屏</string>
+    <string name="video_stretch">拉伸</string>
+    <string name="video_crop">裁剪</string>
+    <string name="video_screen_locked">屏幕已锁定</string>
+    <string name="video_screen_unlocked">屏幕锁定已解除</string>
+    <string name="video_layout_buffering_progress">缓冲: %.2f%%</string>
+    <string name="video_cannot_play">对不起,这个视频不能播放。</string>
+    <string name="file_explorer_sdcard_not_available">SD卡无法读取</string>
+    <string name="video_screenshot_save_in">截图存放在 %s.</string>
+    <string name="video_screenshot_failed">截图失败</string>
+    <string name="closing_file">正在退出…</string>
+    
+    <string name="exit_click">再按一次退出程序</string>
+    <string name="video_play">播放在线视频</string>
+    <string name="video_search">搜索视频</string>
+    <string name="video_down">下载该视频</string>
+    <string name="open_mrl_dialog_msg">请输入网络 MRL: 如 http://、mms://、rtmp://或 rtsp://等</string> 
+    <string name="app_about">  找乐视频是基于56网开发的一款视频软件，如果您觉得这款软件不错，记得帮忙分享一下哦!官方群QQ74275086。</string>
+    <string name="search_hint">请输入关键词</string>
+    <string name="share">分享</string>
+    <string name="play">播放</string>
+  <string name="loding">加载中&#8230;</string>
+    
+    <string name="text_tj">推荐</string>
+    <string name="tv_text_cy">穿越</string>
+    <string name="tv_text_hj">韩剧</string>
+    <string name="tv_text_zr">最热</string>
+    <string name="tv_text_zx">最新</string>
+    <string name="tv_text_dl">大陆</string>
+    <string name="tv_text_mj">美剧</string>
+    <string name="tv_text_gj">港剧</string>
+    <string name="tv_text_rj">日剧</string>
+    <string name="tv_text_yj">英剧</string>
+    <string name="tv_text_hp">好评榜</string>
+    <string name="tv_text_tj">台剧</string>
+    <string name="tv_text_taij">泰剧</string>
+    
+    <string name="tv_text_aq">爱情片</string>
+    <string name="tv_text_xj">喜剧片</string>
+    <string name="tv_text_dz">动作片</string>
+    <string name="tv_text_kb">恐怖片</string>
+    <string name="tv_text_jq">剧情片</string>
+    <string name="tv_text_kh">科幻片</string>
+    <string name="tv_text_wd">微电影</string>
+    <string name="tv_text_zz">战争片</string>
+    <string name="tv_text_xy">悬疑片</string>
+    <string name="tv_text_dh">动画片</string>
+    
+    <string name="dm_text_ph">最热</string>
+    <string name="dm_text_rb">日系</string>
+    <string name="dm_text_mx">冒险</string>
+    <string name="dm_text_kh">科幻</string>
+    <string name="dm_text_gx">搞笑</string>
+    <string name="dm_text_zz">战争</string>
+    <string name="dm_text_rz">忍者</string>
+    
+    <string name="zy_text_zr">最热</string>
+    <string name="zy_text_rh">日韩</string>
+    <string name="zy_text_xx">选秀</string>
+    <string name="zy_text_yy">音乐</string>
+    <string name="zy_text_tk">脱口秀</string>
+    <string name="zy_text_sh">生活</string>
+    <string name="zy_text_ms">美食</string>
+    <string name="zy_text_ft">访谈</string>
+    <string name="zy_text_se">少儿</string>
+    
+ 
+
+      <string name="Movies">电影</string> 
+      <string name="TV">电视剧</string> 
+      <string name="Variety">综艺</string> 
+      <string name="Music">音乐</string> 
+      <string name="Anime">动漫</string> 
+      <string name="Education">教育</string> 
+      <string name="Sports">体育</string> 
+      <string name="Documentary">纪录片</string> 
+</resources>

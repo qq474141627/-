@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="blue">#0000FF</color>
+    <color name="green">#00FF00</color>
+    <color name="red">#FF0000</color>
+    <color name="higtlight">#0078F0</color>
+    <color name="durationtext">#7D7D7D</color>
+    <color name="background">#F0EFF5</color>
+    <color name="yellow">#FFCC00</color>
+    <color name="gray">#8080FF</color>
+    <color name="transparent">#00000000</color>
+    <color name="mediacontroller_bg_pressed">#53C1BD</color>
+    <color name="mediacontroller_bg">#99000000</color>
+    <color name="background_dark">#F4F4F4</color>
+    <color name="listview_item">#CCCCCC</color>
+    <color name="more_select_bg">#EE9A00</color>
+    <color name="main_bt_text_color">#EEEEE0</color>
+    <color name="listview">#EBEBEB</color>
+    <color name="yellow">#FF740F</color>
+    <color name="horizontalbar">#F8F8F8</color>
+    <color name="fragment_menu">#DEE1E2</color>
+    <color name="titlebar">#336699</color>
+    <color name="listview_title">#333333</color>
+    <color name="listview_text">#666666</color>
+    <color name="up_count">#D9B374</color>
+    <color name="greentext">#8BB900</color>
+    <color name="green_80">#800099cc</color>
+    <color name="green_100">#0099cc</color>
+</resources>

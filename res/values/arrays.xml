@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--移动 -->
+    <string-array name="cmcc">
+    </string-array> 
+    
+    <!--联通 -->
+    <string-array name="uniom">
+        <item>北京</item>
+        <item>重庆</item>
+        <item>吉林</item>
+        <item>河南</item>
+        <item>陕西</item>
+        <item>黑龙江</item>
+    </string-array> 
+    
+    <!--电信 -->
+    <string-array name="net">
+        <item>四川</item>
+        <item>上海</item>
+        <item>重庆</item>
+        <item>浙江</item>
+        <item>新疆</item>
+        <item>河北</item>
+    </string-array> 
+    
+      <string-array name="Movies">
+        <item >全部</item>
+        <item >剧情</item>
+        <item >喜剧</item>
+        <item >爱情</item>
+        <item >动作</item>
+        <item >惊悚</item>
+        <item >犯罪</item>
+        <item >恐怖</item>
+        <item >奇幻</item>
+        <item >冒险</item>
+        <item >悬疑</item>
+        <item >科幻</item>
+        <item >战争</item>
+        <item >警匪</item>
+        <item >武侠</item>
+        <item >儿童</item>
+        <item >动画</item>
+        <item >戏曲</item>
+    </string-array>
+    <string-array name="TV">
+        <item >全部</item>
+        <item >都市</item>
+        <item >剧情</item>
+        <item >家庭</item>
+        <item >古装</item>
+        <item >搞笑</item>
+        <item >偶像</item>
+        <item >警匪</item>
+        <item >悬疑</item>
+        <item >武侠</item>
+        <item >科幻</item>
+        <item >神话</item>
+        <item >言情</item>
+        <item >时装</item>
+        <item >农村</item>
+        <item >儿童</item>
+    </string-array>
+
+     <string-array name="Variety">
+        <item >全部</item>
+        <item >娱乐</item>
+        <item >生活</item>
+        <item >家庭</item>
+        <item >真人秀</item>
+        <item >访谈</item>
+        <item >纪实</item>
+        <item >音乐</item>
+        <item >脱口秀</item>
+        <item >搞笑</item>
+        <item >少儿</item>
+        <item >时尚</item>
+        <item >游戏</item>
+        <item >旅游</item>
+        <item >理财</item>
+        <item >美食</item>
+        <item >益智</item>
+        <item >选秀</item>
+        <item >牛人</item>
+        <item >演唱会</item>
+        <item >体育</item>
+    </string-array>
+    
+     <string-array name="Anime">
+        <item >全部</item>
+        <item >剧情</item>
+        <item >冒险</item>
+        <item >科幻</item>
+        <item >搞笑</item>
+        <item >恋爱</item>
+        <item >美少女</item>
+        <item >忍者</item>
+        <item >热血</item>
+        <item >校园</item>
+        <item >童话</item>
+        <item >战争</item>
+        <item >青春</item>
+        <item >神魔</item>
+        <item >穿越</item>
+        <item >吸血鬼</item>
+    </string-array>
+    
+     <string-array name="Music">
+        <item >全部</item>
+        <item >流行</item>
+        <item >摇滚</item>
+        <item >舞曲</item>
+        <item >电子</item>
+        <item >HOP</item>
+        <item >R B</item>
+        <item >乡村</item>
+        <item >民谣</item>
+        <item >拉丁</item>
+        <item >爵士</item>
+        <item >雷鬼</item>
+        <item >古典</item>
+        <item >轻音乐</item>
+    </string-array>
+    
+     <string-array name="Documentary">
+        <item >全部</item>
+        <item >社会</item>
+        <item >历史</item>
+        <item >文化</item>
+        <item >自然</item>
+        <item >人物</item>
+        <item >军事</item>
+        <item >科技</item>
+        <item >探险</item>
+        <item >旅游</item>
+        <item >刑侦</item>
+        <item >古迹</item>
+        <item >宇宙</item>
+        <item >财经</item>
+    </string-array>
+    
+     <string-array name="Education">
+        <item >全部</item>
+        <item >外语</item>
+        <item >基础</item>
+        <item >职业</item>
+        <item >名人</item>
+        <item >生物</item>
+        <item >医学</item>
+        <item >大学</item>
+        <item >经济</item>
+        <item >哲学</item>
+        <item >心理学</item>
+        <item >管理</item>
+        <item >法律</item>
+        <item >历史</item>
+        <item >伦理</item>
+        <item >学历</item>
+        <item >文化</item>
+        <item >艺术</item>
+        <item >环境</item>
+    </string-array>
+    
+     <string-array name="Sports">
+        <item >全部</item>
+        <item >世界杯</item>
+        <item >亚运会</item>
+        <item >CBA</item>
+        <item >英超</item>
+        <item >高尔夫</item>
+    </string-array>
+
+</resources>
