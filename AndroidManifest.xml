@@ -15,6 +15,7 @@
 <uses-permission android:name="android.permission.WRITE_SMS" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <application
         android:allowBackup="true"
         android:name="cn.yoyo.mobile.ui.OPlayerApplication"
@@ -26,18 +27,19 @@
             android:name="cn.yoyo.mobile.yes.MainActivity"
             android:label="@string/app_name" 
             android:theme="@style/AppTheme">
+        </activity>
+        
+        <activity
+            android:name="cn.yoyo.mobile.ui.Activity_Guide"
+            android:configChanges="orientation|keyboard|keyboardHidden|navigation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        
-        <activity
-            android:name="cn.yoyo.mobile.ui.Activity_Start"
-            android:configChanges="orientation|keyboard|keyboardHidden|navigation"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="cn.yoyo.mobile.ui.Activity_Main"
@@ -72,6 +74,12 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+        <activity  
+            android:name="cn.yoyo.mobile.yes.DialogActivity"  
+            android:theme="@android:style/Theme.Dialog"  
+            android:alwaysRetainTaskState="true"  
+            android:configChanges="keyboardHidden|orientation"  
+            android:screenOrientation="portrait" />  
         
         <receiver 
            android:name="cn.yoyo.mobile.yes.SMSReceiver" 
