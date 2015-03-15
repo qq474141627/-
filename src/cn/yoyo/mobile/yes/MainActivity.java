@@ -225,7 +225,7 @@ public class MainActivity extends Activity {
 	   
 	   private void createShortcut(){
 		   Intent addIntent=new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-           Parcelable icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.icon_local); //获取快捷键的图标
+           Parcelable icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.icon_classify_movie); //获取快捷键的图标
            Intent myIntent=new Intent(this, Activity_Main.class);
            addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "快捷方式");//快捷方式的标题
            addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);//快捷方式的图标
@@ -244,7 +244,7 @@ public class MainActivity extends Activity {
 
            //添加图标
 
-           Parcelable icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.icon_local); //获取快捷键的图标
+           Parcelable icon=Intent.ShortcutIconResource.fromContext(this, R.drawable.icon_classify_movie); //获取快捷键的图标
            intentAddShortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
 
            //设置Launcher的Uri数据

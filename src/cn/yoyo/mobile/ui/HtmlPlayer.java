@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.TimerTask;
 
 import cn.yoyo.mobile.yef.R;
+
+import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;
 
 import android.annotation.SuppressLint;
@@ -65,6 +67,7 @@ public class HtmlPlayer extends Activity{
             t_progress=(TextView) findViewById(R.id.t_progress);
             url=getIntent().getStringExtra("url");
             init1();
+            Manager.view1(this);
     }
     
     @Override

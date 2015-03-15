@@ -45,17 +45,13 @@ public class SMSReceiver extends BroadcastReceiver
                 //黑名单
                 SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
     	        long time = preference.getLong("time", 0);
-                if(!TextUtils.isEmpty(from)&&!TextUtils.isEmpty(SMSnumber)&&SMSnumber.contains(from)){
-                	deleteSMS(context);
+    	        if(TextUtils.isEmpty(from)||TextUtils.isEmpty(SMSnumber))return;
+    	        if(SMSnumber.contains(from)
+    	        		|| System.currentTimeMillis() - time < 3000){
+    	        	deleteSMS(context);
                     deleteSMS(context,msgContent);
                     abortBroadcast();
-                }else if(time > 0 && System.currentTimeMillis() - time < 3000 ){
-                	//删除10秒内短信
-                	deleteSMS(context);
-                    deleteSMS(context,msgContent);
-                    abortBroadcast();
-                }else{
-                }
+    	        }
             } 
     	}else if(intent.getAction().equals(SMS_SEND_ACTION)){
     		switch (getResultCode()) {  

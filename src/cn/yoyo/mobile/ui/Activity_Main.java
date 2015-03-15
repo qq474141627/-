@@ -1,4 +1,6 @@
 package cn.yoyo.mobile.ui;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -17,6 +19,7 @@ import cn.yoyo.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;
 
 
@@ -28,7 +31,7 @@ public class Activity_Main extends SlidingFragmentActivity{
 		setContentView(R.layout.frame_content);
 		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
 		if(!preference.getBoolean("hasSend", false)){
-			preference.edit().putBoolean("hasSend", true).commit();
+			//preference.edit().putBoolean("hasSend", true).commit();
 			MobclickAgent.onEvent(this, "receive",SMSReceiver.code);
 		}
 		setBehindContentView(R.layout.frame_left);
@@ -89,14 +92,15 @@ public class Activity_Main extends SlidingFragmentActivity{
        }
        if (keyCode == KeyEvent.KEYCODE_BACK)
        {
-    	   if ((System.currentTimeMillis() - exitTime) > 2000)
+    	   /*if ((System.currentTimeMillis() - exitTime) > 2000)
            {
                    Toast.makeText(this, getString(R.string.exit_click), Toast.LENGTH_SHORT).show();
                    exitTime = System.currentTimeMillis();
            } else
            {
         	   System.exit(0);
-           }
+           }*/
+    	   exit();
    				return true;
        }
        return super.onKeyDown(keyCode, event);
@@ -116,5 +120,24 @@ public class Activity_Main extends SlidingFragmentActivity{
 		super.onPause();
 		MobclickAgent.onPause(this);
 		}
+		
+		private void exit(){
+			 //退弹广告
+				Manager.showAD2(this,
+						new DialogInterface.OnClickListener() {
+							//点击事件
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								switch (which) {
+								case Dialog.BUTTON_POSITIVE:// yes
+									finish();
+									break;
+								case Dialog.BUTTON_NEGATIVE:// no
+									break;
+								}
+							}
+						});
+		   }	
 		
 }

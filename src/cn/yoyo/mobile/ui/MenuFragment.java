@@ -36,11 +36,11 @@ public class MenuFragment extends Fragment implements OnItemClickListener{
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        root.add(new OnlineVideo("电  视  剧", R.drawable.icon_tv1));
-		root.add(new OnlineVideo("电        影", R.drawable.icon_video));
-		root.add(new OnlineVideo("动        漫", R.drawable.icon_tv2));
-		root.add(new OnlineVideo("综        艺", R.drawable.icon_local));
-	//	root.add(new OnlineVideo("音        乐", R.drawable.icon_local));
+        root.add(new OnlineVideo("电  视  剧", R.drawable.icon_classify_tv));
+		root.add(new OnlineVideo("电        影", R.drawable.icon_classify_movie));
+		root.add(new OnlineVideo("动        漫", R.drawable.icon_classify_dongman));
+		root.add(new OnlineVideo("综        艺", R.drawable.icon_classify_zongyi));
+	//	root.add(new OnlineVideo("娱        乐", R.drawable.icon_classify_gaoxiao));
 	//	root.add(new OnlineVideo("纪  录  片", R.drawable.icon_local));
 	//	root.add(new OnlineVideo("教        育", R.drawable.icon_local));
 	//	root.add(new OnlineVideo("体        育", R.drawable.icon_local));
@@ -76,11 +76,13 @@ public class MenuFragment extends Fragment implements OnItemClickListener{
 		case 3://综艺
 			startFrament(new Fragment_ZY(),arg2);
 			break;
-	//	case 4://音乐
+		case 4://音乐
+			startFrament(new Fragment_ZY(),arg2);
+			break;
 	//	case 5://纪录片
 	//	case 6://教育
 	//	case 7://体育
-        case 4://设置
+        case 5://设置
         	startActivity(new Intent(getActivity(), Activity_Set.class));
 			break;
 		default:
