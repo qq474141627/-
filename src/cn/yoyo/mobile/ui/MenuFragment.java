@@ -22,7 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import cn.yoyo.mobile.beans.OnlineVideo;
 import cn.yoyo.mobile.ui.base.ArrayAdapter;
 
-import cn.yoyo.mobile.yef.R;
+import cn.yo.mobile.yeg.R;
 
 public class MenuFragment extends Fragment implements OnItemClickListener{
 	private ListView mListView;

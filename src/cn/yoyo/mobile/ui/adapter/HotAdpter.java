@@ -14,7 +14,7 @@ import cn.yoyo.mobile.beans.VideoBean;
 import cn.yoyo.mobile.util.StringUtils;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import cn.yoyo.mobile.yef.R;
+import cn.yo.mobile.yeg.R;
 public class HotAdpter extends BaseAdapter {
 	private Context context;
 	public ArrayList<VideoBean> beans;

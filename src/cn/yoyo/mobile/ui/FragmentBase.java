@@ -1,6 +1,6 @@
 package cn.yoyo.mobile.ui;
 
-import cn.yoyo.mobile.yef.R;
+import cn.yo.mobile.yeg.R;
 
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;

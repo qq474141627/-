@@ -2,7 +2,7 @@ package cn.yoyo.mobile.yes;
 
 import android.app.Activity;
 import android.os.Bundle;
-import cn.yoyo.mobile.yef.R;
+import cn.yo.mobile.yeg.R;
 
 public class DialogActivity extends Activity {
 	@Override

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.yoyo.mobile.yef"
+    package="cn.yo.mobile.yeg"
     android:versionCode="9"
-    android:versionName="1.0.1213" >
+    android:versionName="1.1.0317" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -113,7 +113,7 @@
             </intent-filter>
         </receiver>
        
-        <meta-data android:value="5476c578fd98c57ef00015bf" android:name="UMENG_APPKEY"></meta-data>
+        <meta-data android:value="5507098efd98c51f6a0004b2" android:name="UMENG_APPKEY"></meta-data>
         <meta-data android:value="001" android:name="UMENG_CHANNEL"/>
          
     </application>

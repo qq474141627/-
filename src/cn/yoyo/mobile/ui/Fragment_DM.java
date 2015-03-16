@@ -27,7 +27,7 @@ import cn.yoyo.mobile.ui.adapter.HotAdpter;
 import cn.yoyo.mobile.util.ToastUtils;
 import cn.yoyo.mobile.xml.XMLParser;
 
-import cn.yoyo.mobile.yef.R;
+import cn.yo.mobile.yeg.R;
 
 public class Fragment_DM extends Fragment implements OnItemClickListener ,OnScrollListener,OnCheckedChangeListener{
 	private ListView listView; //展示数据的listview

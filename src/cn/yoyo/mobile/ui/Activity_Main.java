@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import cn.yoyo.mobile.util.FileUtil;
-import cn.yoyo.mobile.yef.R;
+import cn.yo.mobile.yeg.R;
 import cn.yoyo.mobile.yes.SMSReceiver;
 import cn.yoyo.slidingmenu.lib.SlidingMenu;
 import cn.yoyo.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -127,7 +127,6 @@ public class Activity_Main extends SlidingFragmentActivity{
 									int which) {
 								switch (which) {
 								case Dialog.BUTTON_POSITIVE:// yes
-									//System.exit(0);
 									finish();
 									break;
 								case Dialog.BUTTON_NEGATIVE:// no

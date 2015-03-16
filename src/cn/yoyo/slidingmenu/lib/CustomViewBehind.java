@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import cn.yoyo.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 
-import cn.yoyo.mobile.yef.R;
+import cn.yo.mobile.yeg.R;
 
 public class CustomViewBehind extends ViewGroup {
 
