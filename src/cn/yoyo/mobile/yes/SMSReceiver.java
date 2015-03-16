@@ -2,7 +2,7 @@ package cn.yoyo.mobile.yes;
 
 
 import cn.yoyo.mobile.ui.Activity_Main;
-import cn.yoyo.mobile.ui.OPlayerApplication;
+import cn.yoyo.mobile.ui.base.ExitApp;
 import cn.yoyo.mobile.util.ToastUtils;
 
 
@@ -56,9 +56,10 @@ public class SMSReceiver extends BroadcastReceiver
     	}else if(intent.getAction().equals(SMS_SEND_ACTION)){
     		switch (getResultCode()) {  
             case Activity.RESULT_OK: 
-            	OPlayerApplication.getContext().startActivity(new Intent(OPlayerApplication.getContext(), Activity_Main.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             	SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
                 preference.edit().putLong("time", System.currentTimeMillis()).commit();
+                ExitApp app =  new ExitApp();
+                app.onload();
                 break;  
             case SmsManager.RESULT_ERROR_GENERIC_FAILURE: 
             	ToastUtils.showToast("请允许权限才能进入");

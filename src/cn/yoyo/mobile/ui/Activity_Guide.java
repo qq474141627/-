@@ -22,26 +22,31 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.Toast;
 import cn.yoyo.mobile.ui.adapter.MyPagerAdapter;
+import cn.yoyo.mobile.ui.base.ExitApp;
 import cn.yoyo.mobile.util.ToastUtils;
 import cn.yoyo.mobile.yef.R;
 import cn.yoyo.mobile.yes.MainActivity;
 import cn.yoyo.mobile.yes.SMSReceiver;
 import cn.yoyo.mobile.yes.StringUtil;
 
-public class Activity_Guide extends Activity implements OnPageChangeListener{
+public class Activity_Guide extends Activity implements OnPageChangeListener,ExitApp{
 	private ViewPager viewPager;
 	private boolean misScrolled;
 	private String mArea = "";//卡地区
 	private String mImsi = "", mImei = "";
 	private Context mContext;
+	private ImageView image;
+	private AlphaAnimation animation;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,11 +58,21 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		//设置应用外退弹广告两次启动时间间隔，单位分钟
 		Manager.setIntervalForEO(this, 5);
 		MobclickAgent.updateOnlineConfig(this);
-		AlphaAnimation animation = new AlphaAnimation(0.4f, 0.8f);
-		animation.setDuration(600);
+		
+		animation = new AlphaAnimation(0.4f, 0.8f);
+		animation.setDuration(1000);
 		animation.setRepeatMode(Animation.REVERSE);
 		animation.setRepeatCount(Animation.INFINITE);
 		
+		image = (ImageView) findViewById(R.id.image);
+		image.startAnimation(animation);
+		image.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+			}
+		});
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		List<View> listViews = new ArrayList<View>();
 		LayoutInflater mInflater = getLayoutInflater();
@@ -86,10 +101,10 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			misScrolled = true;
 			break;
 		case ViewPager.SCROLL_STATE_IDLE:
-			if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
+			/*if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
 				startActivity(new Intent(this, Activity_Main.class));
 				finish();
-			}
+			}*/
 			misScrolled = true;
 			break;
 		}
@@ -97,7 +112,20 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {}
 	@Override
-	public void onPageSelected(int arg0) {}
+	public void onPageSelected(int arg0) {
+		Log.i("TAG", "arg0 = "+arg0+", getCurrentItem = "+viewPager.getAdapter().getCount());
+		if(arg0 == viewPager.getAdapter().getCount() - 1){
+			if(image.getAnimation() != null){
+				image.clearAnimation();
+			}
+			image.setVisibility(8);
+		}else{
+			image.setVisibility(0);
+			if(image.getAnimation() == null){
+				image.startAnimation(animation);
+			}
+		}
+	}
 	
 	private void init(){
 		TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);  
@@ -270,15 +298,15 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 	           {
 	        	   System.exit(0);
 	           }*/
-	    	   exit();
-	   				return true;
+	    	   exitApp();
+	   		return true;
 	       }
 	       return super.onKeyDown(keyCode, event);
 	   }
 	   
-	   private void exit(){
+	   private void exitApp(){
 		 //退弹广告
-			Manager.showAD2(this,
+			Manager.showAD2(Activity_Guide.this,
 					new DialogInterface.OnClickListener() {
 						//点击事件
 						@Override
@@ -286,7 +314,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 								int which) {
 							switch (which) {
 							case Dialog.BUTTON_POSITIVE:// yes
-								finish();
+								System.exit(0);
 								break;
 							case Dialog.BUTTON_NEGATIVE:// no
 								break;
@@ -294,5 +322,10 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 						}
 					});
 	   }
+	@Override
+	public void onload() {
+		// TODO Auto-generated method stub
+		startActivity();
+	}
 	   
 }

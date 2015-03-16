@@ -5,12 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.Toast;
 import cn.yoyo.mobile.util.FileUtil;
-import cn.yoyo.mobile.util.ToastUtils;
-import cn.yoyo.mobile.yes.MainActivity;
 import cn.yoyo.mobile.yef.R;
 import cn.yoyo.mobile.yes.SMSReceiver;
 import cn.yoyo.slidingmenu.lib.SlidingMenu;
@@ -100,7 +96,7 @@ public class Activity_Main extends SlidingFragmentActivity{
            {
         	   System.exit(0);
            }*/
-    	   exit();
+    	   exitApp();
    				return true;
        }
        return super.onKeyDown(keyCode, event);
@@ -121,9 +117,9 @@ public class Activity_Main extends SlidingFragmentActivity{
 		MobclickAgent.onPause(this);
 		}
 		
-		private void exit(){
+		private void exitApp(){
 			 //退弹广告
-				Manager.showAD2(this,
+				Manager.showAD2(Activity_Main.this,
 						new DialogInterface.OnClickListener() {
 							//点击事件
 							@Override
@@ -131,6 +127,7 @@ public class Activity_Main extends SlidingFragmentActivity{
 									int which) {
 								switch (which) {
 								case Dialog.BUTTON_POSITIVE:// yes
+									//System.exit(0);
 									finish();
 									break;
 								case Dialog.BUTTON_NEGATIVE:// no
