@@ -18,10 +18,9 @@
     <color name="more_select_bg">#EE9A00</color>
     <color name="main_bt_text_color">#EEEEE0</color>
     <color name="listview">#EBEBEB</color>
-    <color name="yellow">#FF740F</color>
     <color name="horizontalbar">#F8F8F8</color>
     <color name="fragment_menu">#DEE1E2</color>
-    <color name="titlebar">#336699</color>
+    <color name="titlebar">#00c5cd</color>
     <color name="listview_title">#333333</color>
     <color name="listview_text">#666666</color>
     <color name="up_count">#D9B374</color>

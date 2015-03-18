@@ -52,7 +52,7 @@
         <item name="android:textSize">17sp</item>
         <item name="android:layout_weight">1.0</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/titlebar</item>
+        <item name="android:textColor">@color/radiobutton</item>
     </style>
 <style name="list_style">
         <item name="android:scrollbarThumbVertical">@drawable/listbar</item>

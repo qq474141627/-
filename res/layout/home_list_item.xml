@@ -28,7 +28,7 @@
             android:singleLine="true"
             android:ellipsize="end"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:id="@+id/hot_mv_name_id"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
              android:textColor="@color/listview_text"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:id="@+id/hot_mv_update_id"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
              android:layout_height="fill_parent"
              >
              <TextView 
-                 android:textSize="13sp"
+                 android:textSize="15sp"
                  android:textColor="@color/listview_text"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                  android:text="点   播: "
                  />
              <TextView 
-                 android:textSize="13sp"
+                 android:textSize="15sp"
                  android:textColor="@color/listview_text"
                  android:singleLine="true"
                  android:ellipsize="end"
@@ -67,7 +67,7 @@
                  android:id="@+id/hot_nums1"
                  />
               <TextView 
-                  android:textSize="13sp"
+                  android:textSize="15sp"
                  android:textColor="@color/listview_text"
                   android:layout_below="@+id/hot_nums"
                  android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                  android:text="评  分: "
                  />
               <TextView 
-                  android:textSize="13sp"
+                  android:textSize="15sp"
                  android:textColor="@color/listview_text"
                   android:layout_toRightOf="@+id/hot_score"
                   android:layout_below="@+id/hot_nums"
@@ -85,16 +85,18 @@
                  android:id="@+id/hot_score1"
                  />
              <TextView 
-                 android:textSize="13sp"
+                 android:textSize="15sp"
                  android:textColor="@color/listview_text"
                  android:layout_below="@+id/hot_score"
                  android:text="上  映: "
+                 android:visibility="gone"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:id="@+id/hot_time"
                  />
              <TextView 
-                 android:textSize="13sp"
+                 android:textSize="15sp"
+                 android:visibility="gone"
                  android:textColor="@color/listview_text"
                  android:layout_below="@+id/hot_score"
                  android:layout_toRightOf="@+id/hot_score"

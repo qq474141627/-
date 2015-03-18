@@ -3,15 +3,19 @@ package cn.yoyo.mobile.ui;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -24,6 +28,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import cn.yoyo.mobile.beans.Parameter;
 import cn.yoyo.mobile.beans.VideoBean;
 import cn.yoyo.mobile.ui.adapter.HotAdpter;
+import cn.yoyo.mobile.ui.adapter.MyPagerAdapter;
 import cn.yoyo.mobile.util.ToastUtils;
 import cn.yoyo.mobile.xml.XMLParser;
 
@@ -70,11 +75,63 @@ public class Fragment_DM extends Fragment implements OnItemClickListener ,OnScro
 			footerView = inflater.inflate(R.layout.progress_bar, null);
 			footerView.setVisibility(View.GONE);
 			listView.addFooterView(footerView);
+			initViewPager(inflater);
 			new MyThread().start();
 		}
 		return mView;
 	}
 
+	private void initViewPager(LayoutInflater mInflater){
+		ViewPager viewPager = (ViewPager) mView.findViewById(R.id.viewPager);
+		List<View> listViews = new ArrayList<View>();
+		View view1 = mInflater.inflate(R.layout.item_viewpager5, null);
+		view1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
+				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22222449.html");
+				startActivity(intent);
+			}
+		});
+		listViews.add(view1);
+		View view2 = mInflater.inflate(R.layout.item_viewpager6, null);
+		view2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
+				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22195131.html");
+				startActivity(intent);
+			}
+		});
+		listViews.add(view2);
+		View view3 = mInflater.inflate(R.layout.item_viewpager7, null);
+		view3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
+				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22195131.html");
+				startActivity(intent);
+			}
+		});
+		listViews.add(view3);
+		View view4 = mInflater.inflate(R.layout.item_viewpager8, null);
+		view4.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
+				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22195131.html");
+				startActivity(intent);
+			}
+		});
+		listViews.add(view4);
+		viewPager.setAdapter(new MyPagerAdapter(listViews));
+		((Activity_Main)getActivity()).getSlideMenu().addIgnoredView(viewPager);
+	}
+	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {

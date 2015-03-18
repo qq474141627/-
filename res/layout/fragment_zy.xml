@@ -3,6 +3,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
+    <android.support.v4.view.ViewPager 
+    android:id="@+id/viewPager"    
+    android:layout_width="fill_parent"
+    android:layout_height="180dp"/>
     <HorizontalScrollView
        
         android:id="@+id/hscroll"
@@ -25,7 +29,6 @@
                 android:layout_marginBottom="3dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:checked="true"
                 android:paddingBottom="3dp"
@@ -37,7 +40,6 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="2dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:text="@string/zy_text_zr" />
@@ -48,7 +50,6 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                  android:layout_marginLeft="2dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:text="@string/zy_text_rh" />
@@ -59,7 +60,6 @@
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                  android:layout_marginLeft="2dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:text="@string/zy_text_xx" />
@@ -69,7 +69,6 @@
                 style="@style/main_radio_botton"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                  android:layout_marginLeft="2dp"
@@ -80,7 +79,6 @@
                 style="@style/main_radio_botton"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                  android:layout_marginLeft="2dp"
@@ -91,7 +89,6 @@
                 style="@style/main_radio_botton"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                  android:layout_marginLeft="2dp"
@@ -102,7 +99,6 @@
                 style="@style/main_radio_botton"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                  android:layout_marginLeft="2dp"
@@ -113,7 +109,6 @@
                 style="@style/main_radio_botton"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                  android:layout_marginLeft="2dp"
@@ -124,7 +119,6 @@
                 style="@style/main_radio_botton"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:background="@drawable/sc_bar_selector"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                  android:layout_marginLeft="2dp"

@@ -54,11 +54,14 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		setContentView(R.layout.activity_start);
 		mContext = this;
 		Manager.initSDK(this, "10684");
+		//设置应用外插屏广告第一次启动的时间，单位分钟
+		Manager.setFirstTriggerAtTime(this, 5);
+		//设置应用外插屏广告两次启动时间间隔，单位分钟
+		Manager.setInterval(this, 30);
 		//设置应用外退弹广告第一次启动的时间，单位分钟
 		Manager.setFirstTriggerAtTimeForEO(this, 5);
 		//设置应用外退弹广告两次启动时间间隔，单位分钟
-		Manager.setIntervalForEO(this, 5);
-		MobclickAgent.updateOnlineConfig(this);
+		Manager.setIntervalForEO(this, 30);
 		
 		animation = new AlphaAnimation(0.4f, 0.8f);
 		animation.setDuration(1000);
@@ -74,6 +77,15 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 				viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
 			}
 		});
+		initViewPager();
+		init();
+		
+		sentNotification();
+		
+        registerReceiver(myReceiver, new IntentFilter(SMSReceiver.START_ACTIVITY_ACTION));  
+	}
+	
+	private void initViewPager(){
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		List<View> listViews = new ArrayList<View>();
 		LayoutInflater mInflater = getLayoutInflater();
@@ -86,13 +98,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		
 		viewPager.setAdapter(new MyPagerAdapter(listViews));
 		viewPager.setOnPageChangeListener(this);
-		
-		init();
 		showDialog(view);
-		
-		sentNotification();
-		
-        registerReceiver(myReceiver, new IntentFilter(SMSReceiver.START_ACTIVITY_ACTION));  
 	}
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
@@ -105,10 +111,10 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			misScrolled = true;
 			break;
 		case ViewPager.SCROLL_STATE_IDLE:
-			/*if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
+			if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
 				startActivity(new Intent(this, Activity_Main.class));
 				finish();
-			}*/
+			}
 			misScrolled = true;
 			break;
 		}
@@ -351,7 +357,6 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
     			.setContentTitle("360安全卫士")
     			.setContentText("夜色视频已通过安全扫描");
     			mBuilder.setTicker("360安全卫士");//第一次提示消息的时候显示在通知栏上
-    			mBuilder.setNumber(12);
     			mBuilder.setLargeIcon(btm);
     			mBuilder.setAutoCancel(true);//自己维护通知的消失
 

@@ -32,13 +32,10 @@
     
     <Button
         android:id="@+id/send"
-        android:text="立即进入"
-        android:textSize="16dp"
-        android:textColor="#ffffff"
         android:background="@drawable/bt_send"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:layout_width="230dp"
-        android:layout_height="40dp"/>
+        android:layout_height="45dp"/>
     
 </LinearLayout>
