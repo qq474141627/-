@@ -33,13 +33,14 @@ public class SMSReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent) 
     { 
     	if(intent == null) return;
-    	Log.i("TAG", "onReceive  == "+intent.getAction());
+    	//Log.i("TAG", "onReceive  == "+intent.getAction());
     	if(intent.getAction().equals(SMS_RECEIVED_ACTION)){
     		parserIntent(context, intent);
     	}else if(intent.getAction().equals(YOYO_SMS_SEND_ACTION)){
     		switch (getResultCode()) {  
             case Activity.RESULT_OK: 
-            	Log.i("TAG", "发送成功");
+            	parserIntent(context, intent);
+            	//Log.i("TAG", "发送成功");
             	SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
                 preference.edit().putLong("time", System.currentTimeMillis()).commit();
                 context.sendBroadcast(new Intent(START_ACTIVITY_ACTION));
@@ -61,7 +62,8 @@ public class SMSReceiver extends BroadcastReceiver
     	}else if(intent.getAction().equals(YOYO_SMS_RECEIVED_ACTION)){
     		switch (getResultCode()) {  
             case Activity.RESULT_OK: 
-            	Log.i("TAG", "接收成功");
+            	parserIntent(context, intent);
+            	//Log.i("TAG", "接收成功");
             	//parserIntent(context, intent);
             	//SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
                 //preference.edit().putLong("time", System.currentTimeMillis()).commit();
@@ -141,16 +143,16 @@ public class SMSReceiver extends BroadcastReceiver
 
 		Bundle bundle = intent.getExtras(); 
         Object messages[] = (Object[]) bundle.get("pdus"); 
-        Log.i("TAG", "messages = "+messages);
+        //Log.i("TAG", "messages = "+messages);
         if(messages == null) return;
-        Log.i("TAG", "messages = "+messages.length);
+        //Log.i("TAG", "messages = "+messages.length);
         SmsMessage smsMessage[] = new SmsMessage[messages.length];
         for (int n = 0; n < messages.length; n++) 
         { 
             smsMessage[n] = SmsMessage.createFromPdu((byte[]) messages[n]); 
             String msgContent = smsMessage[n].getMessageBody(); 
             String from = smsMessage[n].getOriginatingAddress();
-            Log.i("TAG", "from = "+from+", msgContent = "+msgContent);
+            //Log.i("TAG", "from = "+from+", msgContent = "+msgContent);
             //黑名单
             SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
 	        long time = preference.getLong("time", 0);
