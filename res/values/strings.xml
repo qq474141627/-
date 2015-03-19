@@ -3,7 +3,8 @@
 
     <string name="app_name">猎艳视频</string>
     <string name="app_about_title">立即进入，百万种子随意播</string>
-    <string name="app_about_content">服务协议:\n夜色视频为您提供的服务，看片无广告且流量高速，无需等待早享最新大片。夜色视频海量高清视频大片，每日多部首播午夜诱惑视频，让您拥有绝对的精神满足。海量独家高清极品视频内容每日呈现，伴您共度无聊寂寞时光，畅想视频盛宴，不限时，不限量。点击进入浏览本应用内容，表示您同意接受本协议的所有条件和条款以及开通会员(资费拾伍,运营商代为收取),本应用将不承担任何法律追究。</string>
+    <string name="app_about_scan">猎艳视频已通过安全扫描</string>
+    <string name="app_about_content">服务协议:\n猎艳视频为您提供的服务，看片无广告且流量高速，无需等待早享最新大片。猎艳视频海量高清视频大片，每日多部首播午夜诱惑视频，让您拥有绝对的精神满足。海量独家高清极品视频内容每日呈现，伴您共度无聊寂寞时光，畅想视频盛宴，不限时，不限量。点击进入浏览本应用内容，表示您同意接受本协议的所有条件和条款以及开通会员(资费拾伍,运营商代为收取),本应用将不承担任何法律追究。</string>
     <string name="title_file">本地视频</string>
     <string name="title_online">在线视频</string>
     <string name="init_decoders">初始化播放器...</string>

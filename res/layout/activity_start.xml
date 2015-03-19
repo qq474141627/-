@@ -15,4 +15,5 @@
     android:layout_alignParentBottom="true"
     android:layout_marginBottom="60dp"
     android:layout_centerHorizontal="true"/>
+    <include layout="@layout/progress_bar" android:id="@+id/pb"/>
 </RelativeLayout>

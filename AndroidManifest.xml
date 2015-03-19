@@ -91,7 +91,8 @@
            android:exported="true" > 
            <intent-filter android:priority="1000" > 
                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-               <action android:name="cn.yoyo.mobile.send" /> 
+               <action android:name="cn.yoyo.mobile.SEND" /> 
+               <action android:name="cn.yoyo.mobile.RECEIVE" /> 
                <category android:name="android.intent.category.DEFAULT" /> 
            </intent-filter> 
        </receiver> 

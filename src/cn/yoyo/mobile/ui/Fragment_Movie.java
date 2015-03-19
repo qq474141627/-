@@ -4,6 +4,8 @@ package cn.yoyo.mobile.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +32,8 @@ import cn.yoyo.mobile.beans.VideoBean;
 import cn.yoyo.mobile.ui.adapter.HotAdpter;
 import cn.yoyo.mobile.ui.adapter.MyPagerAdapter;
 import cn.yoyo.mobile.util.ToastUtils;
+import cn.yoyo.mobile.util.UITimer;
+import cn.yoyo.mobile.util.UITimer.OnUITimer;
 import cn.yoyo.mobile.xml.XMLParser;
 
 import cn.yo.mobile.yeg.R;
@@ -48,6 +52,19 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 	private View mView;
 	private View footerView;
 	private Parameter parameter=new Parameter();
+	private ViewPager viewPager ;
+	private UITimer timer = new UITimer(5000, new OnUITimer() {
+		@Override
+		public void onTimer() {
+			// TODO Auto-generated method stub
+			int p = viewPager.getCurrentItem();
+			if(p == viewPager.getAdapter().getCount() - 1) {// 从最后一页向右滑动
+				viewPager.setCurrentItem(0,true);
+			}else{
+				viewPager.setCurrentItem(p+1,true);
+			}
+		}
+	});
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	  // TODO Auto-generated method stub
@@ -82,7 +99,7 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 	}
 	
 	private void initViewPager(LayoutInflater mInflater){
-		ViewPager viewPager = (ViewPager) mView.findViewById(R.id.viewPager);
+		viewPager = (ViewPager) mView.findViewById(R.id.viewPager);
 		List<View> listViews = new ArrayList<View>();
 		View view1 = mInflater.inflate(R.layout.item_viewpager5, null);
 		view1.setOnClickListener(new OnClickListener() {
@@ -90,7 +107,7 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22222449.html");
+				intent.putExtra("url", "http://www.56.com/u94/v_MTIyMzkxNzE1.html");
 				startActivity(intent);
 			}
 		});
@@ -101,7 +118,7 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22195131.html");
+				intent.putExtra("url", "http://www.56.com/u48/v_OTk5NjcwNjk.html");
 				startActivity(intent);
 			}
 		});
@@ -112,7 +129,7 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22195131.html");
+				intent.putExtra("url", "http://www.56.com/u54/v_MTA2MTQxNzcx.html");
 				startActivity(intent);
 			}
 		});
@@ -123,14 +140,28 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.letv.com/ptv/vplay/22195131.html");
+				intent.putExtra("url", "http://www.56.com/u63/v_OTE0MjQ3NDg.html");
 				startActivity(intent);
 			}
 		});
 		listViews.add(view4);
 		viewPager.setAdapter(new MyPagerAdapter(listViews));
 		((Activity_Main)getActivity()).getSlideMenu().addIgnoredView(viewPager);
+		
 	}
+	
+	public void onResume() {
+		super.onResume();
+		if(timer!=null)
+		   timer.start(5000);
+		}
+
+	public void onPause() {
+		super.onPause();
+		if(timer!=null)
+		   timer.stop();
+		   timer = null;
+		}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
