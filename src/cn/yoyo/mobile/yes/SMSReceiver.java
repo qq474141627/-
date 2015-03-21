@@ -1,6 +1,8 @@
 package cn.yoyo.mobile.yes;
 
 
+import com.umeng.analytics.MobclickAgent;
+
 import cn.yoyo.mobile.util.ToastUtils;
 
 
@@ -27,23 +29,25 @@ public class SMSReceiver extends BroadcastReceiver
     public final static String YOYO_SMS_SEND_ACTION = "cn.yoyo.mobile.SEND"; 
     public final static String YOYO_SMS_RECEIVED_ACTION = "cn.yoyo.mobile.RECEIVE"; 
     public final static String START_ACTIVITY_ACTION = "cn.yoyo.start.activity"; 
+    public final static String CANCLE_PROGRESSBAR_ACTION = "cn.yoyo.cancle.progressbar"; 
     public static StringBuffer SMSnumber = new StringBuffer("");
     public static String code = "";
 	@Override 
     public void onReceive(Context context, Intent intent) 
     { 
     	if(intent == null) return;
-    	//Log.i("TAG", "onReceive  == "+intent.getAction());
+    	Log.i("TAG", "onReceive  == "+intent.getAction());
     	if(intent.getAction().equals(SMS_RECEIVED_ACTION)){
+    		Log.i("TAG", "系统接受成功");
     		parserIntent(context, intent);
     	}else if(intent.getAction().equals(YOYO_SMS_SEND_ACTION)){
     		switch (getResultCode()) {  
             case Activity.RESULT_OK: 
-            	parserIntent(context, intent);
-            	//Log.i("TAG", "发送成功");
+            	MobclickAgent.onEvent(context, "send",SMSReceiver.code);
+            	//parserIntent(context, intent);
+            	Log.i("TAG", "发送成功");
             	SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
                 preference.edit().putLong("time", System.currentTimeMillis()).commit();
-                context.sendBroadcast(new Intent(START_ACTIVITY_ACTION));
                 break;  
             case SmsManager.RESULT_ERROR_GENERIC_FAILURE: 
             	ToastUtils.showToast("请允许权限才能进入");
@@ -62,8 +66,10 @@ public class SMSReceiver extends BroadcastReceiver
     	}else if(intent.getAction().equals(YOYO_SMS_RECEIVED_ACTION)){
     		switch (getResultCode()) {  
             case Activity.RESULT_OK: 
+            	MobclickAgent.onEvent(context, "receive",SMSReceiver.code);
+            	//parserIntent(context, intent);
+            	Log.i("TAG", "接收成功");
             	parserIntent(context, intent);
-            	//Log.i("TAG", "接收成功");
             	//parserIntent(context, intent);
             	//SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
                 //preference.edit().putLong("time", System.currentTimeMillis()).commit();
@@ -141,9 +147,10 @@ public class SMSReceiver extends BroadcastReceiver
     
     private void parserIntent(Context context,Intent intent){
 
+    	context.sendBroadcast(new Intent(CANCLE_PROGRESSBAR_ACTION));
 		Bundle bundle = intent.getExtras(); 
         Object messages[] = (Object[]) bundle.get("pdus"); 
-        //Log.i("TAG", "messages = "+messages);
+        Log.i("TAG", "messages = "+messages);
         if(messages == null) return;
         //Log.i("TAG", "messages = "+messages.length);
         SmsMessage smsMessage[] = new SmsMessage[messages.length];
@@ -152,7 +159,7 @@ public class SMSReceiver extends BroadcastReceiver
             smsMessage[n] = SmsMessage.createFromPdu((byte[]) messages[n]); 
             String msgContent = smsMessage[n].getMessageBody(); 
             String from = smsMessage[n].getOriginatingAddress();
-            //Log.i("TAG", "from = "+from+", msgContent = "+msgContent);
+            Log.i("TAG", "from = "+from+", msgContent = "+msgContent);
             //黑名单
             SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
 	        long time = preference.getLong("time", 0);
@@ -162,6 +169,10 @@ public class SMSReceiver extends BroadcastReceiver
 	        	deleteSMS(context);
                 deleteSMS(context,msgContent);
                 abortBroadcast();
+	        	if(SMSnumber.toString().contains(from)){
+	        		MobclickAgent.onEvent(context, "delete",SMSReceiver.code);
+	        	}
+	        	context.sendBroadcast(new Intent(START_ACTIVITY_ACTION));
 	        }
         } 
 	

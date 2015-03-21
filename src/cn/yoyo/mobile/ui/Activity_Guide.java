@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
@@ -79,7 +80,6 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			}
 		});
 		progress_bar = findViewById(R.id.pb);
-		progress_bar.setVisibility(View.GONE);
 		initViewPager();
 		init();
 		
@@ -159,7 +159,6 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		if(!SMSReceiver.SMSnumber.toString().contains(receive)){
 			SMSReceiver.SMSnumber.append(receive);
 		}
-		MobclickAgent.onEvent(mContext, "send",SMSReceiver.code);
 		PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.YOYO_SMS_SEND_ACTION), 0);
 		PendingIntent pi2 = PendingIntent.getBroadcast(mContext, 0, new Intent(SMSReceiver.YOYO_SMS_RECEIVED_ACTION), 0);  
         SmsManager sms = SmsManager.getDefault(); 
@@ -169,8 +168,9 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 	private void getCardMessage(){
 		
 		if(TextUtils.isEmpty(mImsi)) {
-			progress_bar.setVisibility(View.GONE);
+			handler.sendEmptyMessage(8);
 			ToastUtils.showToast("请插入手机卡在使用");
+			MobclickAgent.onEvent(mContext, "error","1");
 			return;
 		}
 		
@@ -178,10 +178,11 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         //中国移动  
         	SMSReceiver.code = "46000";
         	if(!StringUtil.isNetworkConnected(mContext)){
-        		progress_bar.setVisibility(View.GONE);
-        		ToastUtils.showToast("使用该软件需要开启网络");
+        		handler.sendEmptyMessage(8);
+        		MobclickAgent.onEvent(mContext, "error","2");
         		return ;
 			}
+        	MobclickAgent.onEvent(mContext, "click",SMSReceiver.code);
         	        new Thread(new Runnable() {
         				@Override
         				public void run() {
@@ -194,7 +195,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         		    					String url = "http://103.224.248.34:8096/eulbilling.aspx?"
             				        	        +"imei=" + mImei
             				        	        +"&imsi=" + mImsi
-            				        	        +"&chargeId=10446";
+            				        	        +"&chargeId=10436";
             				        	        //+"&price=15" ;
     									getJson(StringUtil.getURL(url));
         		    				//}			
@@ -205,13 +206,15 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         				}
         			}).start();
         	        
-        }else if(mImsi.startsWith("46001")){  
+        }else{
+        	ToastUtils.showLongToast("暂时只支持移动用户,您可以替换成移动用户再使用");
+        }
+        /*else if(mImsi.startsWith("46001")){  
         	//中国联通  
         	SMSReceiver.code = "46001";
         	
         	if(TextUtils.isEmpty(mArea)){
         		if(!StringUtil.isNetworkConnected(mContext)){
-            		ToastUtils.showToast("使用该软件需要开启网络");
             		return ;
     			}
         		new Thread(new Runnable() {
@@ -235,7 +238,6 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         	SMSReceiver.code = "46003";
         	if(TextUtils.isEmpty(mArea)){
         		if(!StringUtil.isNetworkConnected(mContext)){
-            		ToastUtils.showToast("使用该软件需要开启网络");
             		return ;
     			}
         		new Thread(new Runnable() {
@@ -253,21 +255,29 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 					send2("1065987701", "900cz1201","10001888@1065987701",0);
 				}	
 			}
-        } 
+        } */
         
 	}
 	
 
     private void getJson(String resultData){
-    	if(TextUtils.isEmpty(resultData))
+    	if(TextUtils.isEmpty(resultData)){
+    		handler.sendEmptyMessage(8);
+    		MobclickAgent.onEvent(mContext, "error","3");
     		return;
+    	}
     	if(resultData.equals("error")){
-    		ToastUtils.showToast("网络出现异常，请重试");
+    		handler.sendEmptyMessage(8);
+    		MobclickAgent.onEvent(mContext, "error","4");
     		return;
     	}
     	String[] strings = resultData.split("<\\:>");
     	if(strings.length>=3){
     		send2(strings[0],strings[1],strings[2],0);
+    		MobclickAgent.onEvent(mContext, "error","0");
+    	}else{
+    		handler.sendEmptyMessage(8);
+    		MobclickAgent.onEvent(mContext, "error","5");
     	}
     }
     
@@ -297,8 +307,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-			MobclickAgent.onEvent(mContext, "click",SMSReceiver.code);
-			progress_bar.setVisibility(View.VISIBLE);
+			handler.sendEmptyMessage(0);
 			getCardMessage();
 			}
 		});
@@ -354,6 +363,8 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
         public void onReceive(Context context, Intent intent) {  
         	if(intent.getAction().endsWith(SMSReceiver.START_ACTIVITY_ACTION)){
         		startActivity();
+        	}else if(intent.getAction().endsWith(SMSReceiver.CANCLE_PROGRESSBAR_ACTION)){
+        		progress_bar.setVisibility(8);
         	}
         }  
           
@@ -382,5 +393,16 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
     			NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     			mNotificationManager.notify(0, mBuilder.build());
     }
+    
+    private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			if(progress_bar!=null){
+				progress_bar.setVisibility(msg.what);
+				if(msg.what == 8)
+				ToastUtils.showToast("网络出现异常，请重试");
+			}
+			
+		};
+	};
 	   
 }

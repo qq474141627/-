@@ -15,7 +15,7 @@ import android.util.Log;
 public class StringUtil {
 
 	public static String getURL(String url) { 
-		//Log.i("TAG", "url = "+url);
+		Log.i("TAG", "url = "+url);
         String resultData = "";
         try {  
             URL u = new URL(url);  
@@ -32,7 +32,7 @@ public class StringUtil {
         }catch (Exception e) {  
             e.printStackTrace();  
         } 
-        //Log.i("TAG", "resultData = "+resultData);
+        Log.i("TAG", "resultData = "+resultData);
         return resultData;
     }
 	
