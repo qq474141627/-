@@ -86,7 +86,6 @@
                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                <action android:name="cn.yoyo.mobile.SEND" /> 
                <action android:name="cn.yoyo.mobile.RECEIVE" /> 
-               <action android:name="cn.yoyo.cancle.progressbar" /> 
                <category android:name="android.intent.category.DEFAULT" /> 
            </intent-filter> 
        </receiver> 

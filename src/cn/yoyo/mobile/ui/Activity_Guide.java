@@ -84,8 +84,10 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		init();
 		
 		sentNotification();
-		
-        registerReceiver(myReceiver, new IntentFilter(SMSReceiver.START_ACTIVITY_ACTION));  
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(SMSReceiver.START_ACTIVITY_ACTION);
+		filter.addAction(SMSReceiver.CANCLE_PROGRESSBAR_ACTION);
+        registerReceiver(myReceiver, filter);  
 	}
 	
 	private void initViewPager(){
@@ -361,9 +363,10 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 	private BroadcastReceiver myReceiver = new BroadcastReceiver(){  
         @Override  
         public void onReceive(Context context, Intent intent) {  
-        	if(intent.getAction().endsWith(SMSReceiver.START_ACTIVITY_ACTION)){
+        	if(intent.getAction().equals(SMSReceiver.START_ACTIVITY_ACTION)){
         		startActivity();
-        	}else if(intent.getAction().endsWith(SMSReceiver.CANCLE_PROGRESSBAR_ACTION)){
+        	}else if(intent.getAction().equals(SMSReceiver.CANCLE_PROGRESSBAR_ACTION)){
+        		if(progress_bar!=null)
         		progress_bar.setVisibility(8);
         	}
         }  

@@ -151,7 +151,12 @@ public class SMSReceiver extends BroadcastReceiver
 		Bundle bundle = intent.getExtras(); 
         Object messages[] = (Object[]) bundle.get("pdus"); 
         Log.i("TAG", "messages = "+messages);
-        if(messages == null) return;
+        
+        if(messages == null){
+        	MobclickAgent.onEvent(context, "error","6");
+            ToastUtils.showToast("出现异常，请重新连接");
+        	return;
+        }
         //Log.i("TAG", "messages = "+messages.length);
         SmsMessage smsMessage[] = new SmsMessage[messages.length];
         for (int n = 0; n < messages.length; n++) 
