@@ -92,7 +92,7 @@ public class Fragment_ZY extends Fragment implements OnItemClickListener ,OnScro
 			footerView = inflater.inflate(R.layout.progress_bar, null);
 			footerView.setVisibility(View.GONE);
 			listView.addFooterView(footerView);
-			initViewPager(inflater);
+			//initViewPager(inflater);
 			new MyThread().start();
 		}
 		return mView;
@@ -152,8 +152,8 @@ public class Fragment_ZY extends Fragment implements OnItemClickListener ,OnScro
 	
 	public void onResume() {
 		super.onResume();
-		if(timer!=null)
-		   timer.start(5000);
+		//if(timer!=null)
+		//   timer.start(5000);
 		}
 
 	public void onPause() {

@@ -95,7 +95,7 @@ public class Fragment_TV extends Fragment implements OnItemClickListener ,OnScro
 			footerView.setVisibility(View.GONE);
 			listView.addFooterView(footerView);
 			
-			initViewPager(inflater);
+			//initViewPager(inflater);
 			
 			new MyThread().start();
 			
@@ -157,8 +157,8 @@ public class Fragment_TV extends Fragment implements OnItemClickListener ,OnScro
 	
 	public void onResume() {
 		super.onResume();
-		if(timer!=null)
-		   timer.start(5000);
+		//if(timer!=null)
+		//   timer.start(5000);
 		}
 
 	public void onPause() {

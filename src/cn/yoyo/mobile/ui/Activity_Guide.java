@@ -72,6 +72,7 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		
 		image = (ImageView) findViewById(R.id.image);
 		image.startAnimation(animation);
+		//image.setVisibility(View.VISIBLE);
 		image.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -94,9 +95,9 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 		viewPager = (ViewPager) findViewById(R.id.viewPager);
 		List<View> listViews = new ArrayList<View>();
 		LayoutInflater mInflater = getLayoutInflater();
-		listViews.add(mInflater.inflate(R.layout.item_viewpager1, null));
-		listViews.add(mInflater.inflate(R.layout.item_viewpager2, null));
-		listViews.add(mInflater.inflate(R.layout.item_viewpager3, null));
+		//listViews.add(mInflater.inflate(R.layout.item_viewpager1, null));
+		//listViews.add(mInflater.inflate(R.layout.item_viewpager2, null));
+		//listViews.add(mInflater.inflate(R.layout.item_viewpager3, null));
 		View view = mInflater.inflate(R.layout.activity_main, null);
 		view.findViewById(R.id.app_about_title).startAnimation(animation);
 		listViews.add(view);
@@ -310,7 +311,8 @@ public class Activity_Guide extends Activity implements OnPageChangeListener{
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 			handler.sendEmptyMessage(0);
-			getCardMessage();
+			//getCardMessage();
+			startActivity();
 			}
 		});
 	}

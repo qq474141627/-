@@ -92,7 +92,7 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 			footerView = inflater.inflate(R.layout.progress_bar, null);
 			footerView.setVisibility(View.GONE);
 			listView.addFooterView(footerView);
-			initViewPager(inflater);
+			//initViewPager(inflater);
 			new MyThread().start();
 		}
 		return mView;
@@ -152,8 +152,8 @@ public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnS
 	
 	public void onResume() {
 		super.onResume();
-		if(timer!=null)
-		   timer.start(5000);
+		//if(timer!=null)
+		//   timer.start(5000);
 		}
 
 	public void onPause() {
