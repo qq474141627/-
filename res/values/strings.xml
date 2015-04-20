@@ -43,7 +43,7 @@
     <string name="video_search">搜索视频</string>
     <string name="video_down">下载该视频</string>
     <string name="open_mrl_dialog_msg">请输入网络 MRL: 如 http://、mms://、rtmp://或 rtsp://等</string> 
-    <string name="app_about">  找乐视频是基于56网开发的一款视频软件，如果您觉得这款软件不错，记得帮忙分享一下哦!官方群QQ74275086。</string>
+    <string name="app_about">  夜色视频是基于56网开发的一款视频软件，如果您觉得这款软件不错，记得帮忙分享一下哦!官方群QQ74275086。</string>
     <string name="search_hint">请输入关键词</string>
     <string name="share">分享</string>
     <string name="play">播放</string>

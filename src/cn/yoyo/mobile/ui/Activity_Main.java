@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import cn.yoyo.mobile.util.FileUtil;
 import cn.yo.mobile.yeg.R;
-import cn.yoyo.mobile.yes.SMSReceiver;
 import cn.yoyo.slidingmenu.lib.SlidingMenu;
 import cn.yoyo.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -26,10 +25,6 @@ public class Activity_Main extends SlidingFragmentActivity{
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.frame_content);
 		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
-		if(!preference.getBoolean("hasSend", false)){
-			//preference.edit().putBoolean("hasSend", true).commit();
-			MobclickAgent.onEvent(this, "receive",SMSReceiver.code);
-		}
 		setBehindContentView(R.layout.frame_left);
 		FileUtil.makeAppCacheDir();
 		init();

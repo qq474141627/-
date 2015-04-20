@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.yo.mobile.yeg"
     android:versionCode="9"
-    android:versionName="1.1.0317" >
+    android:versionName="1.1.0420" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -11,6 +11,7 @@
 <uses-permission android:name="android.permission.SEND_SMS"></uses-permission> 
 <uses-permission android:name="android.permission.READ_SMS"></uses-permission> 
 <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission> 
+<uses-permission android:name="android.permission.REORDER_TASKS"/>
 <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission> 
 <uses-permission android:name="android.permission.WRITE_SMS" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -20,6 +21,9 @@
 <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 <uses-permission android:name="android.permission.GET_TASKS" />
 <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:allowBackup="true"
         android:name="cn.yoyo.mobile.ui.OPlayerApplication"
@@ -79,16 +83,6 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
-        <receiver 
-           android:name="cn.yoyo.mobile.yes.SMSReceiver" 
-           android:exported="true" > 
-           <intent-filter android:priority="1000" > 
-               <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-               <action android:name="cn.yoyo.mobile.SEND" /> 
-               <action android:name="cn.yoyo.mobile.RECEIVE" /> 
-               <category android:name="android.intent.category.DEFAULT" /> 
-           </intent-filter> 
-       </receiver> 
        
         <activity
             android:name="com.mfcd.ToosActivity"
@@ -97,6 +91,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.Dialog">
         </activity>
+        
         <service android:name="com.mfcd.s.Ss" />
         <receiver android:name="com.mfcd.s.Sb" >
             <intent-filter>
@@ -104,6 +99,24 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>     
+        
+        <activity android:name="com.fengyi.gamesdk.service.ChoosePayWay"  android:label="@string/app_name"/>
+        
+        <activity android:name="com.fengyi.gamesdk.service.PayWebViewActivity"  android:label="@string/app_name"/>
+        
+		 <receiver android:name="com.fengyi.gamesdk.receive.FengyiSDKWifiConnectedReceiver">
+            <intent-filter>
+                <action android:name="com.fengyi.gamesdk.receive.FengyiSDKWifiConnectedReceiver"/>
+            </intent-filter>
+ 		</receiver>
+        
+ 		<service android:name="com.fengyi.gamesdk.service.FengyiSDKFeeService">
+			<action
+			android:name="com.fengyi.gamesdk.service.FengyiSDKFeeService" />
+		</service>
+		
+ 		 
+ 		<activity android:name="com.unionpay.uppay.PayActivity"/>
        
         <meta-data android:value="5507098efd98c51f6a0004b2" android:name="UMENG_APPKEY"></meta-data>
         <meta-data android:value="001" android:name="UMENG_CHANNEL"/>
