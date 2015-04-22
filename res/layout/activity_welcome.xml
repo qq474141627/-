@@ -1,41 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="280dp"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@drawable/welcome_shape"
-    android:id="@+id/dialog_welcome"
-    android:orientation="vertical">
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="135dp"
-        android:scrollbars="none"
-        android:layout_margin="10dp"
-        android:cacheColorHint="#00000000">
-    <TextView
-        android:text="@string/app_about_content"
-        android:textSize="16dp"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    </ScrollView>
-    <TextView
-        android:id="@+id/app_about_title"
-        android:text="@string/app_about_title"
-        android:textSize="16dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="@color/green"
-        android:layout_width="fill_parent"
-        android:gravity="center_horizontal"
-        android:layout_height="wrap_content"/>
-    
-    <Button
-        android:id="@+id/send"
-        android:background="@drawable/bt_send"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_width="230dp"
-        android:layout_height="45dp"/>
-    
-</LinearLayout>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:gravity="center">
+</RelativeLayout>

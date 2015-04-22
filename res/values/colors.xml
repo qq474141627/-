@@ -11,6 +11,7 @@
     <color name="yellow">#FFCC00</color>
     <color name="gray">#8080FF</color>
     <color name="transparent">#00000000</color>
+    <color name="transparent_80">#a0000000</color>
     <color name="mediacontroller_bg_pressed">#53C1BD</color>
     <color name="mediacontroller_bg">#99000000</color>
     <color name="background_dark">#F4F4F4</color>
@@ -23,6 +24,7 @@
     <color name="titlebar">#00c5cd</color>
     <color name="listview_title">#333333</color>
     <color name="listview_text">#666666</color>
+    <color name="listview_text2">#999999</color>
     <color name="up_count">#D9B374</color>
     <color name="greentext">#8BB900</color>
     <color name="green_80">#800099cc</color>

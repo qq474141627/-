@@ -21,7 +21,7 @@ public class MyDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_welcome);
+        this.setContentView(R.layout.dialog_warning);
         this.setCanceledOnTouchOutside(false);
     }
 

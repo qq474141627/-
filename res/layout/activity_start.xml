@@ -2,20 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/bg_start"
     android:gravity="center">
-    <android.support.v4.view.ViewPager 
-    android:id="@+id/viewPager"    
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"/>
-    <ImageView 
-    android:id="@+id/image"    
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:visibility="gone"
-    android:src="@drawable/icon_tips"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="60dp"
-    android:layout_centerHorizontal="true"/>
+    <include layout="@layout/dialog_warning" android:id="@+id/dialog_warning"
+        android:visibility="visible"/>
+    <include layout="@layout/dialog_libao" android:id="@+id/dialog_libao"
+        android:visibility="gone"/>
     <include layout="@layout/progress_bar" android:id="@+id/pb"
         android:visibility="gone"/>
 </RelativeLayout>
