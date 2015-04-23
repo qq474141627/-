@@ -1,8 +1,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="WelcomeTheme" parent="AppBaseTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/main_bg</item> 
+    </style>
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     <style name="StartTheme" parent="AppBaseTheme">
         <item name="homeAsUpIndicator">@drawable/jiantou2</item>

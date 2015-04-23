@@ -36,7 +36,7 @@ import cn.yoyo.mobile.util.UITimer;
 import cn.yoyo.mobile.util.UITimer.OnUITimer;
 import cn.yoyo.mobile.xml.XMLParser;
 
-import cn.yo.mobile.yeg.R;
+import cn.yo.mobile.yeh.R;
 
 public class Fragment_Movie extends Fragment implements OnItemClickListener ,OnScrollListener,OnCheckedChangeListener{
 	private ListView listView; //展示数据的listview

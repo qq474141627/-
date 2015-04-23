@@ -3,7 +3,7 @@ package cn.yoyo.mobile.ui;
 import java.lang.reflect.Method;
 import java.util.TimerTask;
 
-import cn.yo.mobile.yeg.R;
+import cn.yo.mobile.yeh.R;
 
 import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;

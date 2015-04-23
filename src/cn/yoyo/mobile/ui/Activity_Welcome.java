@@ -10,7 +10,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
-import cn.yo.mobile.yeg.R;
+import android.view.KeyEvent;
+import cn.yo.mobile.yeh.R;
 import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;
 
@@ -34,9 +35,10 @@ public class Activity_Welcome extends Activity{
 			public void run() {
 				// TODO Auto-generated method stub
 				startActivity(new Intent(Activity_Welcome.this,Activity_Start.class));
+				overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 				finish();
 			}
-		}, 2000);
+		}, 3000);
 	}
 	
     
@@ -73,5 +75,15 @@ public class Activity_Welcome extends Activity{
     			NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     			mNotificationManager.notify(0, mBuilder.build());
     }
+	
+	@Override
+	   public boolean onKeyDown(int keyCode, KeyEvent event)
+	   {
+	       if (keyCode == KeyEvent.KEYCODE_BACK)
+	       {
+	   				return true;
+	       }
+	       return super.onKeyDown(keyCode, event);
+	   }
 	
 }

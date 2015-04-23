@@ -1,6 +1,6 @@
 package cn.yoyo.mobile.yes;
 
-import cn.yo.mobile.yeg.R;
+import cn.yo.mobile.yeh.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;

@@ -17,7 +17,7 @@ import android.support.v4.app.NotificationCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import cn.yo.mobile.yeg.R;
+import cn.yo.mobile.yeh.R;
 import cn.yoyo.mobile.util.ToastUtils;
 
 import com.fengyi.gamesdk.service.MyPay;
@@ -40,11 +40,12 @@ public class Activity_Start extends Activity{
         receiver=new MyReceiver();
         IntentFilter filter=new IntentFilter();
         filter.addAction(FYPAY_RESUKT_MSG);
-        this.registerReceiver(new MyReceiver(),filter);
+        this.registerReceiver(receiver,filter);
 	}
 	
 	public void onDestroy() {
 		super.onDestroy();
+		if(receiver != null)
 		unregisterReceiver(receiver);
 		}
 	
@@ -85,6 +86,7 @@ public class Activity_Start extends Activity{
 			    switch (value) {
 				case 0:
 			    	startActivity(new Intent(context, Activity_Main.class));
+			    	overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 			    	finish();
 					break;
 				case -2:

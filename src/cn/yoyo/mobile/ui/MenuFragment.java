@@ -22,7 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import cn.yoyo.mobile.beans.OnlineVideo;
 import cn.yoyo.mobile.ui.base.ArrayAdapter;
 
-import cn.yo.mobile.yeg.R;
+import cn.yo.mobile.yeh.R;
 
 public class MenuFragment extends Fragment implements OnItemClickListener{
 	private ListView mListView;
@@ -82,9 +82,6 @@ public class MenuFragment extends Fragment implements OnItemClickListener{
 	//	case 5://纪录片
 	//	case 6://教育
 	//	case 7://体育
-        case 5://设置
-        	startActivity(new Intent(getActivity(), Activity_Set.class));
-			break;
 		default:
 			break;
 		}

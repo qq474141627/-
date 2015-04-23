@@ -1,7 +1,7 @@
 package cn.yoyo.mobile.util;
 
 import cn.yoyo.mobile.ui.OPlayerApplication;
-import cn.yo.mobile.yeg.R;
+import cn.yo.mobile.yeh.R;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;

@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import cn.yoyo.mobile.util.FileUtil;
-import cn.yo.mobile.yeg.R;
+import cn.yo.mobile.yeh.R;
 import cn.yoyo.slidingmenu.lib.SlidingMenu;
 import cn.yoyo.slidingmenu.lib.app.SlidingFragmentActivity;
 
