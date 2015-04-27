@@ -25,7 +25,7 @@ import cn.yoyo.mobile.xml.XMLParser;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
-import cn.yo.mobile.yeh.R;
+import com.android.video.aab.R;
 
 public class Activity_SelectNum extends SherlockActivity implements OnItemClickListener,OnScrollListener{
 	private ListView listView; //展示数据的listview

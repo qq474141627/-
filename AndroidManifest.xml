@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.yo.mobile.yfa"
-    android:versionCode="9"
-    android:versionName="1.1.0423" >
+    package="com.android.video.aab"
+    android:versionCode="1"
+    android:versionName="1.1.0428" >
 
     <uses-sdk
         android:minSdkVersion="11"

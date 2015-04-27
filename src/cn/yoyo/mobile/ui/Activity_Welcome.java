@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.view.KeyEvent;
-import cn.yo.mobile.yeh.R;
+import com.android.video.aab.R;
 import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;
 
@@ -38,7 +38,7 @@ public class Activity_Welcome extends Activity{
 				overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 				finish();
 			}
-		}, 3000);
+		}, 2000);
 	}
 	
     

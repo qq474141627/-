@@ -38,7 +38,7 @@ import cn.yoyo.mobile.util.UITimer;
 import cn.yoyo.mobile.util.UITimer.OnUITimer;
 import cn.yoyo.mobile.xml.XMLParser;
 
-import cn.yo.mobile.yeh.R;
+import com.android.video.aab.R;
 
 public class Fragment_TV extends Fragment implements OnItemClickListener ,OnScrollListener,OnCheckedChangeListener{
 	private ListView listView; //展示数据的listview

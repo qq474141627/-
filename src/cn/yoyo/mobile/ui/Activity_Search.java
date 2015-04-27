@@ -26,7 +26,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import cn.yo.mobile.yeh.R;
+import com.android.video.aab.R;
 
 public class Activity_Search extends SherlockActivity{
 	private HotAdpter adpter;

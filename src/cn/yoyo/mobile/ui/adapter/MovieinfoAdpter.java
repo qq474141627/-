@@ -13,7 +13,7 @@ import cn.yoyo.mobile.beans.SmallVideoBean;
 import cn.yoyo.mobile.util.StringUtils;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import cn.yo.mobile.yeh.R;
+import com.android.video.aab.R;
 public class MovieinfoAdpter extends BaseAdapter {
 	private Context context;
 	public ArrayList<SmallVideoBean> beans;

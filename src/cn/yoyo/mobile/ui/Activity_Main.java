@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import cn.yoyo.mobile.util.FileUtil;
-import cn.yo.mobile.yeh.R;
+import com.android.video.aab.R;
 import cn.yoyo.slidingmenu.lib.SlidingMenu;
 import cn.yoyo.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -24,7 +24,6 @@ public class Activity_Main extends SlidingFragmentActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 		setContentView(R.layout.frame_content);
-		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
 		setBehindContentView(R.layout.frame_left);
 		FileUtil.makeAppCacheDir();
 		init();

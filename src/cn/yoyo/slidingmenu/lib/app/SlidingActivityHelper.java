@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import cn.yo.mobile.yeh.R;
+import com.android.video.aab.R;
 import cn.yoyo.slidingmenu.lib.SlidingMenu;
 
 
