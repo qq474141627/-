@@ -1,7 +1,7 @@
 package cn.yoyo.mobile.util;
 
 import cn.yoyo.mobile.ui.OPlayerApplication;
-import com.android.video.aab.R;
+import com.android.video.aac.R;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;

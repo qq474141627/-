@@ -17,7 +17,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.android.video.aab.R;
+import com.android.video.aac.R;
 
 public class Activity_MovieInfo extends SherlockActivity implements OnClickListener{
 	private VideoBean oBean;

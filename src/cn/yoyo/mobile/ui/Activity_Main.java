@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.widget.Toast;
 import cn.yoyo.mobile.util.FileUtil;
-import com.android.video.aab.R;
+import com.android.video.aac.R;
 import cn.yoyo.slidingmenu.lib.SlidingMenu;
 import cn.yoyo.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;
 
 
@@ -82,16 +82,15 @@ public class Activity_Main extends SlidingFragmentActivity{
        }
        if (keyCode == KeyEvent.KEYCODE_BACK)
        {
-    	   /*if ((System.currentTimeMillis() - exitTime) > 2000)
+    	   if ((System.currentTimeMillis() - exitTime) > 1000)
            {
                    Toast.makeText(this, getString(R.string.exit_click), Toast.LENGTH_SHORT).show();
                    exitTime = System.currentTimeMillis();
            } else
            {
-        	   System.exit(0);
-           }*/
-    	   exitApp();
-   				return true;
+        	   finish();
+           }
+   			return true;
        }
        return super.onKeyDown(keyCode, event);
    }
@@ -110,24 +109,5 @@ public class Activity_Main extends SlidingFragmentActivity{
 		super.onPause();
 		MobclickAgent.onPause(this);
 		}
-		
-		private void exitApp(){
-			 //退弹广告
-				Manager.showAD2(Activity_Main.this,
-						new DialogInterface.OnClickListener() {
-							//点击事件
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								switch (which) {
-								case Dialog.BUTTON_POSITIVE:// yes
-									finish();
-									break;
-								case Dialog.BUTTON_NEGATIVE:// no
-									break;
-								}
-							}
-						});
-		   }	
 		
 }

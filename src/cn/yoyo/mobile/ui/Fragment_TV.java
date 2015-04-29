@@ -38,7 +38,7 @@ import cn.yoyo.mobile.util.UITimer;
 import cn.yoyo.mobile.util.UITimer.OnUITimer;
 import cn.yoyo.mobile.xml.XMLParser;
 
-import com.android.video.aab.R;
+import com.android.video.aac.R;
 
 public class Fragment_TV extends Fragment implements OnItemClickListener ,OnScrollListener,OnCheckedChangeListener{
 	private ListView listView; //展示数据的listview
@@ -103,57 +103,6 @@ public class Fragment_TV extends Fragment implements OnItemClickListener ,OnScro
 		return mView;
 	}
 
-	private void initViewPager(LayoutInflater mInflater){
-		viewPager = (ViewPager) mView.findViewById(R.id.viewPager);
-		List<View> listViews = new ArrayList<View>();
-		View view1 = mInflater.inflate(R.layout.item_viewpager5, null);
-		view1.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.56.com/u94/v_MTIyMzkxNzE1.html");
-				startActivity(intent);
-			}
-		});
-		listViews.add(view1);
-		View view2 = mInflater.inflate(R.layout.item_viewpager6, null);
-		view2.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.56.com/u48/v_OTk5NjcwNjk.html");
-				startActivity(intent);
-			}
-		});
-		listViews.add(view2);
-		View view3 = mInflater.inflate(R.layout.item_viewpager7, null);
-		view3.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.56.com/u54/v_MTA2MTQxNzcx.html");
-				startActivity(intent);
-			}
-		});
-		listViews.add(view3);
-		View view4 = mInflater.inflate(R.layout.item_viewpager8, null);
-		view4.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(),HtmlPlayer.class);
-				intent.putExtra("url", "http://www.56.com/u63/v_OTE0MjQ3NDg.html");
-				startActivity(intent);
-			}
-		});
-		listViews.add(view4);
-		viewPager.setAdapter(new MyPagerAdapter(listViews));
-		((Activity_Main)getActivity()).getSlideMenu().addIgnoredView(viewPager);
-		
-	}
 	
 	public void onResume() {
 		super.onResume();

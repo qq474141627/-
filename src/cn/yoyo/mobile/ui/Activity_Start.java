@@ -19,12 +19,13 @@ import android.support.v4.app.NotificationCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.android.video.aab.R;
+import android.widget.Toast;
+
+import com.android.video.aac.R;
 import cn.yoyo.mobile.util.StringUtils;
 import cn.yoyo.mobile.util.ToastUtils;
 
 import com.fengyi.gamesdk.service.MyPay;
-import com.sup.ab.Manager;
 import com.umeng.analytics.MobclickAgent;
 
 public class Activity_Start extends Activity{
@@ -90,7 +91,7 @@ public class Activity_Start extends Activity{
 	
 	private void pay(){
 		MobclickAgent.onEvent(Activity_Start.this, "pay",price);
-		MyPay.pay(Activity_Start.this, 16);
+		MyPay.pay(Activity_Start.this, price);
 	}
     
 	public class MyReceiver extends BroadcastReceiver {
@@ -138,31 +139,19 @@ public class Activity_Start extends Activity{
 	   @Override
 	   public boolean onKeyDown(int keyCode, KeyEvent event)
 	   {
-	       if (keyCode == KeyEvent.KEYCODE_BACK)
+		   if (keyCode == KeyEvent.KEYCODE_BACK)
 	       {
-	    	   exitApp();
-	   		return true;
+	    	   if ((System.currentTimeMillis() - exitTime) > 1000)
+	           {
+	                   Toast.makeText(this, getString(R.string.exit_click), Toast.LENGTH_SHORT).show();
+	                   exitTime = System.currentTimeMillis();
+	           } else
+	           {
+	        	   finish();
+	           }
+	   			return true;
 	       }
 	       return super.onKeyDown(keyCode, event);
-	   }
-	   
-	   private void exitApp(){
-		 //退弹广告
-			Manager.showAD2(Activity_Start.this,
-					new DialogInterface.OnClickListener() {
-						//点击事件
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-							switch (which) {
-							case Dialog.BUTTON_POSITIVE:// yes
-								finish();
-								break;
-							case Dialog.BUTTON_NEGATIVE:// no
-								break;
-							}
-						}
-					});
 	   }
 	   
 }

@@ -1,6 +1,7 @@
 package cn.yoyo.mobile.ui;
 
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 
@@ -12,9 +13,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.sup.ab.aa;
 
-public class OPlayerApplication extends aa {
+public class OPlayerApplication extends Application {
 
 	private static OPlayerApplication mApplication;
 

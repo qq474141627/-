@@ -11,8 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.view.KeyEvent;
-import com.android.video.aab.R;
-import com.sup.ab.Manager;
+import com.android.video.aac.R;
 import com.umeng.analytics.MobclickAgent;
 
 public class Activity_Welcome extends Activity{
@@ -20,15 +19,6 @@ public class Activity_Welcome extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
-		Manager.initSDK(this, "10684");
-		//设置应用外插屏广告第一次启动的时间，单位分钟
-		Manager.setFirstTriggerAtTime(this, 5);
-		//设置应用外插屏广告两次启动时间间隔，单位分钟
-		Manager.setInterval(this, 30);
-		//设置应用外退弹广告第一次启动的时间，单位分钟
-		Manager.setFirstTriggerAtTimeForEO(this, 5);
-		//设置应用外退弹广告两次启动时间间隔，单位分钟
-		Manager.setIntervalForEO(this, 30);
 		sentNotification();
 		new Handler().postDelayed(new Runnable() {
 			@Override

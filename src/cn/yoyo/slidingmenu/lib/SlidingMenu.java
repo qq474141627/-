@@ -27,7 +27,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.android.video.aab.R;
+import com.android.video.aac.R;
 import cn.yoyo.slidingmenu.lib.CustomViewAbove.OnPageChangeListener;
 
 

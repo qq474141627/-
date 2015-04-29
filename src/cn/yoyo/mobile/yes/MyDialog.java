@@ -1,6 +1,6 @@
 package cn.yoyo.mobile.yes;
 
-import com.android.video.aab.R;
+import com.android.video.aac.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
